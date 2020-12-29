@@ -3,11 +3,12 @@ import { FormControl,FormHelperText,Input,InputLabel,Button,Alert } from '@mater
 import './style.css'
 
 
-const Register =() =>{
+const Reset =() =>{
     let url='https://pizza-apps-backend.herokuapp.com'
     const query= new URLSearchParams(window.location.search)
     const param=!query.get('admin')?'reset':'admin/reset'
-    const [data,setData]=useState({password:"",password1:""})
+    const random = query.get('random')
+    const [data,setData]=useState({password:"",password1:"",randomstring:random})
     const submit = data[0]===data[1] ? async ()=>{
     const res= await axios.post(`${url}/${param}`,data)
     console.log(res.data)
@@ -25,11 +26,10 @@ const Register =() =>{
             <InputLabel htmlFor="my-input2">Confirm Password</InputLabel>
             <Input id="my-input2" onChange={e=>setData({...data,password1:e.target.value})} value={data.password1} aria-describedby="my-helper-text1" />
             <FormHelperText id="my-helper-text1">Minimum 8 characters is considered as Strong Password</FormHelperText>
-            </FormControl>
-
-            <Button variant="contained" color="primary" href="#contained-buttons" onClick={submit}>Submit</Button>
+            </FormControl><br/>
+            <Button variant="contained" color="primary" onClick={submit}>Submit</Button>
             </div>
     )
 }
 
-export default Register;
+export default Reset;

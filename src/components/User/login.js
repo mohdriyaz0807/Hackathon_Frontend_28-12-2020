@@ -31,7 +31,7 @@ const Login =() =>{
             <FormHelperText id="my-helper-text1">Password is case sensitive</FormHelperText>
             </FormControl><br/>
             <FormControl>
-            <Button variant="contained" color="primary" href="#contained-buttons" onClick={submit}>Submit</Button>
+            <Button variant="contained" color="primary"  onClick={submit}>Submit</Button>
             </FormControl><br/>
             <FormControl>
             <Link to='./Register'>New User?</Link>
@@ -43,4 +43,12 @@ const Login =() =>{
     )
 }
 
-export default Login;
+const String=()=>{
+    let url='https://pizza-apps-backend.herokuapp.com'
+    const query= new URLSearchParams(window.location.search)
+    const requiredstring = query.get('string')
+    const res= await axios.get(`${url}/adminconfirm/${requiredstring}`)
+    console.log(res.data)
+}
+
+export default Login ; String

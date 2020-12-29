@@ -21,7 +21,7 @@ const Forgot =() =>{
             <Input id="my-input" onChange={e=>setData({...data,email:e.target.value})} value={data.email}/>
             <FormHelperText id="my-helper-text1">Type your registered EmailId</FormHelperText>
             </FormControl><br/>
-            <Button variant="contained" color="primary" href="#contained-buttons" onClick={submit}>Submit</Button>
+            <Button variant="contained" color="primary" onClick={submit}>Submit</Button>
             </div>
     )
 }

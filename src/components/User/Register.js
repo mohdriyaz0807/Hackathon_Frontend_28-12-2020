@@ -32,8 +32,8 @@ const Register = () =>{
             <InputLabel htmlFor="my-password">Password</InputLabel>
             <Input id="my-password" onChange={e=>setData({...data,password:e.target.value})} value={data.password} aria-describedby="my-helper-text1" />
             <FormHelperText id="my-helper-text1">Minimum 8 characters is considered as Strong Password</FormHelperText>
-            </FormControl>
-            <Button variant="contained" color="primary" href="#contained-buttons" onClick={submit}>Submit</Button>
+            </FormControl><br/>
+            <Button variant="contained" color="primary" onClick={submit}>Submit</Button>
             </div>
     )
 }

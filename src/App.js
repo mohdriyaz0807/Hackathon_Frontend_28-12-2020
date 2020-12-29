@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Login from './components/User/login'
+import {Login,String} from './components/User/login'
 import Register from './components/User/Register'
 import Forgot from './components/User/ForgotPassword'
+import Reset from './components/User/ResetPassword'
 import Home from './components/Home/Home'
-import Admin from './components/Admin/Admin'
+import {Admin,Strings} from './components/Admin/Admin'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import Error404 from './components/Error-404/404'
@@ -25,8 +26,18 @@ function App() {
         </Route>
         <Route exact path="/Register">
           <Register/>
-        </Route><Route exact path="/ForgotPassword">
+        </Route>
+        <Route exact path="/ForgotPassword">
           <Forgot/>
+        </Route>
+        <Route exact path="/ResetPassword">
+          <Reset/>
+        </Route>
+        <Route exact path="/String">
+          <String/>
+        </Route>
+        <Route exact path="/Strings">
+          <Strings/>
         </Route>
         <Route path="*">
           <Error404 />

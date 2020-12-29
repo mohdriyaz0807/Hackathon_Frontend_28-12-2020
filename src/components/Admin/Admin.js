@@ -30,16 +30,24 @@ const Admin =() =>{
             <FormHelperText id="my-helper-text1">Keep your Password safe !</FormHelperText>
             </FormControl><br/>
             <FormControl>
-            <Button variant="contained" color="primary" href="#contained-buttons" onClick={submit}>Submit</Button>
+            <Button variant="contained" color="primary"  onClick={submit}>Submit</Button>
             </FormControl><br/>
             <FormControl>
-            <Link to='./Register'>New User?</Link>
+            <Link to='./Register?admin=true'>New User?</Link>
             </FormControl><br/>
             <FormControl>
-            <Link to='./ForgotPassword'>Forgot Password?</Link>
+            <Link to='./ForgotPassword?admin=true'>Forgot Password?</Link>
             </FormControl>
             </div>
     )
 }
 
-export default Admin;
+const Strings=()=>{
+    let url='https://pizza-apps-backend.herokuapp.com'
+    const query= new URLSearchParams(window.location.search)
+    const requiredstring = query.get('string')
+    const res= await axios.get(`${url}/confirm/${requiredstring}`)
+    console.log(res.data)
+}
+
+export default Admin;Strings
