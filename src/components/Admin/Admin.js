@@ -51,8 +51,7 @@ const Strings=()=>{
     const res = await axios.get(`${url}/adminconfirm/${requiredstring}`)
     console.log(res.data)
     }
-    {show}
-    
+    show()
 }
 
 export  {Admin,Strings,}

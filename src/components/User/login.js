@@ -51,7 +51,7 @@ const String=()=>{
     const res=await axios.get(`${url}/confirm/${requiredstring}`)
     console.log(res.data)
     }
-    {show}
+    show()
 
 }
 
