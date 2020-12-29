@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormControl,FormHelperText,Input,InputLabel,Button,Alert } from '@material-ui/core';
+import { FormControl,FormHelperText,Input,InputLabel,Button } from '@material-ui/core';
 import './style.css'
 
 
@@ -12,9 +12,7 @@ const Reset =() =>{
     const submit = data[0]===data[1] ? async ()=>{
     const res= await axios.post(`${url}/${param}`,data)
     console.log(res.data)
-    }:{alert}
-
-    const alert=()=>{<Alert severity="warning">Password Mismatch!</Alert>}
+    }:alert('Password Mismatch!')
 
     return(
         <div>
