@@ -46,7 +46,7 @@ const Strings=()=>{
     let url='https://pizza-apps-backend.herokuapp.com'
     const query= new URLSearchParams(window.location.search)
     const requiredstring = query.get('string')
-    const res= await axios.get(`${url}/confirm/${requiredstring}`)
+    const res= await axios.get(`${url}/adminconfirm/${requiredstring}`)
     console.log(res.data)
 }
 

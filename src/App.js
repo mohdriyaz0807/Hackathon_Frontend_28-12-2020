@@ -30,7 +30,7 @@ function App() {
         <Route exact path="/ForgotPassword">
           <Forgot/>
         </Route>
-        <Route exact path="/ResetPassword">
+        <Route path="/ResetPassword">
           <Reset/>
         </Route>
         <Route exact path="/String">
