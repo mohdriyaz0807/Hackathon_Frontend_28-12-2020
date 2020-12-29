@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {Login,String} from './components/User/login'
-import Register from './components/User/Register'
+import {Register} from './components/User/Register'
 import Forgot from './components/User/ForgotPassword'
 import Reset from './components/User/ResetPassword'
 import Home from './components/Home/Home'
@@ -33,10 +33,10 @@ function App() {
         <Route path="/ResetPassword/:string/:admin">
           <Reset/>
         </Route>
-        <Route exact path="/String/:requiredString">
+        <Route path="/String/:requiredString">
           <String/>
         </Route>
-        <Route exact path="/Strings/:requiredString">
+        <Route path="/Strings/:requiredString">
           <Strings/>
         </Route>
         <Route path="*">
