@@ -5,9 +5,9 @@ import './style.css'
 
 const Reset =() =>{
     let url='https://pizza-apps-backend.herokuapp.com'
-    const query= new URLSearchParams(window.location.search)
-    const param=!query.get('admin')?'reset':'admin/reset'
-    const random = query.get('random')
+    const href = window.location.href.split('/')
+    const random = href[href.length-1]
+    const param=href[href.length-2]!=='admin'?'reset':'admin/reset'
     const [data,setData]=useState({password:"",password1:"",randomstring:random})
     const submit = data[0]===data[1] ? async ()=>{
     const res= await axios.post(`${url}/${param}`,data)

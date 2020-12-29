@@ -30,13 +30,13 @@ function App() {
         <Route exact path="/ForgotPassword">
           <Forgot/>
         </Route>
-        <Route path="/ResetPassword?:string">
+        <Route path="/ResetPassword/:string/:admin">
           <Reset/>
         </Route>
-        <Route exact path="/String">
+        <Route exact path="/String/:requiredString">
           <String/>
         </Route>
-        <Route exact path="/Strings">
+        <Route exact path="/Strings/:requiredString">
           <Strings/>
         </Route>
         <Route path="*">

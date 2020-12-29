@@ -44,8 +44,8 @@ const Admin =() =>{
 
 const Strings=()=>{
     let url='https://pizza-apps-backend.herokuapp.com'
-    const query= new URLSearchParams(window.location.search)
-    const requiredstring = query.get('string')
+    const href = window.location.href.split('/')
+    const requiredstring = href[href.length-1]
     const res= await axios.get(`${url}/adminconfirm/${requiredstring}`)
     console.log(res.data)
 }
