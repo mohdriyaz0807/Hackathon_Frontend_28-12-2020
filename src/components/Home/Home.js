@@ -1,15 +1,42 @@
 import React from 'react';
 import './HomeStyle.css'
-import {Container ,CssBaseline } from '@material-ui/core';
+import {Paper , Grid ,makeStyles} from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
 
 const Home=()=>{
-    return(
-      <React.Fragment>
-      <CssBaseline />
-      <Container maxWidth="sm" className='bg-image'>
-        <img src='https://1qb35t26pv722y0ac82cika4-wpengine.netdna-ssl.com/wp-content/uploads/2017/10/mogios-hero-1-1024x683.jpg' alt='Pizza'/>
-      </Container>
-    </React.Fragment>
-    )
+
+    const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Paper className={classes.paper}><img src='https://peatzeria.com/wp-content/uploads/2019/09/pizza-cutter-1400x350.jpg' alt='Pizza'/></Paper>
+        </Grid>
+        </Grid>
+        <h1>Find Out Our Products at Exclusive Prices.</h1>
+        <Grid container spacing={3}>
+        <Grid item xs={4}>
+          <Paper className={classes.paper}><img src='https://madeitateitlovedit.com/wp-content/uploads/2019/09/Buffalo-Chicken-Pizza-450x300.jpg' alt='Pizza'/></Paper>
+        </Grid>
+        <Grid item xs={4}>
+          <Paper className={classes.paper}><img src='https://images.squarespace-cdn.com/content/v1/5a9f0c9fec4eb70a5ce752f8/1521032855421-ENB7XEP6UXA6ZBDXDVDL/ke17ZwdGBToddI8pDm48kPZjswWEEM1xUlE2nw_1gDZZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVFEypcWtVdAnmHnO4a1hPNGKftICS8WvBaaDvL8dARr2lYCOBSuh7_iz0ZUXSA5sds/01-Pizza-01-SliceServe-450x300.jpg?format=750w' alt='Pizza'/></Paper>
+        </Grid>
+        <Grid item xs={4}>
+          <Paper className={classes.paper}><img src='https://res.cloudinary.com/hz3gmuqw6/image/upload/c_fill,h_300,q_60,w_450/f_auto/pizza-with-mushrooms-and-peppers-3F28F1E' alt='Pizza'/></Paper>
+        </Grid>
+      </Grid>
+    </div>
+  );
 }
 export default Home;

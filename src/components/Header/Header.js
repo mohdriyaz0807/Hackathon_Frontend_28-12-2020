@@ -9,9 +9,8 @@ function Header(){
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" >
-              Pizza
+              Pizza Corner
             </Typography>
-            <div className='btn-float'>
             <Link to="/">
               <Button variant="contained" color="secondary" href="#contained-buttons">Home</Button>
             </Link>
@@ -21,7 +20,6 @@ function Header(){
             <Link to="/login">
               <Button variant="contained" color="secondary" href="#contained-buttons">Login</Button>
             </Link>
-            </div>
           </Toolbar>
         </AppBar>
       </div>
