@@ -1,3 +1,9 @@
 .first{
     margin-top: 5%;
 }
+
+@media only screen and (max-width:520){
+img#carousel{
+    display: none;
+}
+}
