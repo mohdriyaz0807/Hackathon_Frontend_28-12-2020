@@ -24,7 +24,10 @@ function App() {
         <Route exact path="/login">
           <Login/>
         </Route>
-        <Route exact path="/Register/:admin">
+        <Route path="/Register/admin">
+          <Register/>
+        </Route>
+        <Route path="/Register">
           <Register/>
         </Route>
         <Route exact path="/ForgotPassword">

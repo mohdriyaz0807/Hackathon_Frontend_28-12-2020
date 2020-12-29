@@ -33,10 +33,10 @@ const Admin =() =>{
             <Button variant="contained" color="primary"  onClick={submit}>Submit</Button>
             </FormControl><br/>
             <FormControl>
-            <Link to='./Register?admin=true'>New User?</Link>
+            <Link to='./Register/admin'>New User?</Link>
             </FormControl><br/>
             <FormControl>
-            <Link to='./ForgotPassword?admin=true'>Forgot Password?</Link>
+            <Link to='./ForgotPassword/admin'>Forgot Password?</Link>
             </FormControl>
             </div>
     )
