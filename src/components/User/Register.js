@@ -6,8 +6,9 @@ import './style.css'
 
 const Register = () =>{
     let url='https://pizza-apps-backend.herokuapp.com'
-    const query= new URLSearchParams(window.location.search)
-    const param=!query.get('admin')?'registeruser':'registeradmin'
+    const href = window.location.href.split('/')
+    const query = href[href.length-1]
+    const param=query!='admin'?'registeruser':'registeradmin'
     const [data,setData]=useState({name:"",mobile:"",email:"",password:""})
     const submit = async ()=>{
     const res= await axios.post(`${url}/${param}`,data)
