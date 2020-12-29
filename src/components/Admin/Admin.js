@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   });
 
 const Admin =() =>{
-    let url='http://localhost:4000'
+    let url='https://pizza-apps-backend.herokuapp.com'
     const [data,setData]=useState({email:"",password:""})
     const submit = async ()=>{
     const res= await axios.post(`${url}/adminlogin`,data)

@@ -4,7 +4,7 @@ import './style.css'
 
 
 const Register =() =>{
-    let url='http://localhost:4000'
+    let url='https://pizza-apps-backend.herokuapp.com'
     const query= new URLSearchParams(window.location.search)
     const param=!query.get('admin')?'reset':'admin/reset'
     const [data,setData]=useState({password:"",password1:""})
