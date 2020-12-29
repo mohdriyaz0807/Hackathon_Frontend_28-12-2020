@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {Login,String} from './components/User/login'
-import {Register} from './components/User/Register'
+import Register from './components/User/Register'
 import Forgot from './components/User/ForgotPassword'
 import Reset from './components/User/ResetPassword'
 import Home from './components/Home/Home'
