@@ -4,6 +4,7 @@ import {Paper , Grid ,makeStyles} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    padding: theme.spacing(4),
     flexGrow: 1,
   },
   paper: {
@@ -19,8 +20,8 @@ const Home=()=>{
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
+      <Grid container spacing={12} className='first'>
+        <Grid item xs={12} >
           <Paper className={classes.paper}><img src='https://peatzeria.com/wp-content/uploads/2019/09/pizza-cutter-1400x350.jpg' alt='Pizza'/></Paper>
         </Grid>
         </Grid>

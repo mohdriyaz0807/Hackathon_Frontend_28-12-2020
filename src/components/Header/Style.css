@@ -1,0 +1,14 @@
+
+.Head{
+    position: static;
+    left:0;
+    top: 0;
+    width:100%;
+    background-color:tomato;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+.Link{
+    float: right;
+}

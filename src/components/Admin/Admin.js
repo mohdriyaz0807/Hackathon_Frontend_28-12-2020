@@ -1,14 +1,20 @@
 import './AdminStyle.css'
 import React,{useState} from 'react';
-import { FormControl,FormHelperText,Input,InputLabel,Button,makeStyles  } from '@material-ui/core';
+import { Paper , Grid ,FormControl,FormHelperText,Input,InputLabel,Button,makeStyles  } from '@material-ui/core';
 import { Link } from "react-router-dom";
 import axios from 'axios'
 
-const useStyles = makeStyles({
-    root: {
-      alignItems:'center',
-    },
-  });
+const useStyles = makeStyles((theme) => ({
+  root: {
+    padding: theme.spacing(4),
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
 
 const Admin =() =>{
     let url='https://pizza-apps-backend.herokuapp.com'
@@ -20,24 +26,31 @@ const Admin =() =>{
     const classes = useStyles()
     return(
         <div className={classes.root}>
+          <Grid container spacing={2}>
+            <Grid item xs={4}></Grid>
+          <Grid item xs={4}>
+          <Paper className={classes.paper}>
             <FormControl >
             <InputLabel htmlFor="my-input">Email address</InputLabel>
-            <Input id="my-input" aria-describedby="my-helper-text" onChange={e=>setData({...data,email:e.target.value})} value={data.email}/>
+            <Input type='email' id="my-input" aria-describedby="my-helper-text" onChange={e=>setData({...data,email:e.target.value})} value={data.email}/>
             </FormControl><br/>
             <FormControl>
             <InputLabel htmlFor="my-input1">Password</InputLabel>
-            <Input id="my-input1" aria-describedby="my-helper-text1" onChange={e=>setData({...data,password:e.target.value})} value={data.password}/>
+            <Input type='password' id="my-input1" aria-describedby="my-helper-text1" onChange={e=>setData({...data,password:e.target.value})} value={data.password}/>
             <FormHelperText id="my-helper-text1">Keep your Password safe !</FormHelperText>
-            </FormControl><br/>
+            </FormControl><br/><br/>
             <FormControl>
             <Button variant="contained" color="primary"  onClick={submit}>Submit</Button>
-            </FormControl><br/>
+            </FormControl><br/><br/>
             <FormControl>
             <Link to='./Register/admin'>New User?</Link>
-            </FormControl><br/>
+            </FormControl><br/><br/>
             <FormControl>
             <Link to='./ForgotPassword/admin'>Forgot Password?</Link>
             </FormControl>
+            </Paper>
+            </Grid>
+            </Grid>
             </div>
     )
 }

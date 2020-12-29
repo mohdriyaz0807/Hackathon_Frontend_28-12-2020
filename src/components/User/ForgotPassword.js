@@ -1,27 +1,47 @@
 import React,{useState} from 'react';
-import { FormControl,FormHelperText,Input,InputLabel,Button } from '@material-ui/core';
-import './style.css'
+import {Paper , Grid , FormControl,FormHelperText,Input,InputLabel,Button ,makeStyles} from '@material-ui/core';
 import axios from 'axios'
 
-
+const useStyles = makeStyles((theme) => ({
+    root: {
+      padding: theme.spacing(4),
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
+    },
+  }));
 
 const Forgot =() =>{
     let url='https://pizza-apps-backend.herokuapp.com'
-    const query= new URLSearchParams(window.location.search)
-    const param=!query.get('admin')?'forgotpassword':'admin/forgotpassword'
+    const href = window.location.href.split('/')
+    const query = href[href.length-1]
+    const param=query!=='admin'?'forgotpassword':'admin/forgotpassword'
     const [data,setData]=useState({email:""})
     const submit = async ()=>{
     const res= await axios.post(`${url}/${param}`,data)
     console.log(res.data)
     }
+
+    const classes = useStyles()
+
     return(
-        <div className='Logincol'>
+        <div className={classes.root}>
+        <Grid container spacing={2}>
+          <Grid item xs={4}></Grid>
+        <Grid item xs={4}>
+        <Paper className={classes.paper}>
             <FormControl >
             <InputLabel htmlFor="my-input">Email address</InputLabel>
-            <Input id="my-input" onChange={e=>setData({...data,email:e.target.value})} value={data.email}/>
+            <Input type='email' id="my-input" onChange={e=>setData({...data,email:e.target.value})} value={data.email}/>
             <FormHelperText id="my-helper-text1">Type your registered EmailId</FormHelperText>
-            </FormControl><br/>
+            </FormControl><br/><br/>
             <Button variant="contained" color="primary" onClick={submit}>Submit</Button>
+            </Paper>
+            </Grid>
+            </Grid>
             </div>
     )
 }

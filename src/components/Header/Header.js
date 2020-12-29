@@ -1,28 +1,28 @@
 import React from 'react';
 import './Style.css'
-import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
+import {Toolbar, Typography, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 function Header(){
     return( 
-    <div >
-        <AppBar position="static">
+        <div className='Head'>
           <Toolbar>
-            <Typography variant="h6" >
+            <Typography className='Title'>
               Pizza Corner
             </Typography>
+            <div className='Link'>
             <Link to="/">
-              <Button variant="contained" color="secondary" href="#contained-buttons">Home</Button>
+              <Button variant="contained" color="primary">Home</Button>
             </Link>
             <Link to="/admin">
-              <Button variant="contained" color="secondary" href="#contained-buttons">Admin</Button>
+              <Button variant="contained" color="primary">Admin</Button>
             </Link>
             <Link to="/login">
-              <Button variant="contained" color="secondary" href="#contained-buttons">Login</Button>
+              <Button variant="contained" color="primary">Login</Button>
             </Link>
+            </div>
           </Toolbar>
-        </AppBar>
-      </div>
+        </div>
       )
 }
 export default Header

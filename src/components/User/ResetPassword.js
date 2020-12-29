@@ -1,8 +1,18 @@
 import React,{useState} from 'react';
-import { FormControl,FormHelperText,Input,InputLabel,Button } from '@material-ui/core';
+import {Paper , Grid , FormControl,FormHelperText,Input,InputLabel,Button ,makeStyles} from '@material-ui/core';
 import axios from 'axios'
-import './style.css'
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+      padding: theme.spacing(4),
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
+    },
+  }));
 
 const Reset =() =>{
     let url='https://pizza-apps-backend.herokuapp.com'
@@ -15,18 +25,27 @@ const Reset =() =>{
     console.log(res.data)
     }:alert('Password Mismatch!')
 
+    const classes = useStyles()
+
     return(
-        <div>
+        <div className={classes.root}>
+        <Grid container spacing={2}>
+          <Grid item xs={4}></Grid>
+        <Grid item xs={4}>
+        <Paper className={classes.paper}>
             <FormControl>
             <InputLabel htmlFor="my-input1">Password</InputLabel>
-            <Input id="my-input1" onChange={e=>setData({...data,password:e.target.value})} value={data.password}/>
+            <Input type='password' id="my-input1" onChange={e=>setData({...data,password:e.target.value})} value={data.password}/>
             </FormControl><br/>
             <FormControl>
             <InputLabel htmlFor="my-input2">Confirm Password</InputLabel>
-            <Input id="my-input2" onChange={e=>setData({...data,password1:e.target.value})} value={data.password1} aria-describedby="my-helper-text1" />
+            <Input type='password' id="my-input2" onChange={e=>setData({...data,password1:e.target.value})} value={data.password1} aria-describedby="my-helper-text1" />
             <FormHelperText id="my-helper-text1">Minimum 8 characters is considered as Strong Password</FormHelperText>
-            </FormControl><br/>
+            </FormControl><br/><br/>
             <Button variant="contained" color="primary" onClick={submit}>Submit</Button>
+            </Paper>
+            </Grid>
+            </Grid>
             </div>
     )
 }
