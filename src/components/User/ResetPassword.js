@@ -20,7 +20,7 @@ const Reset =() =>{
             <FormControl>
             <InputLabel htmlFor="my-input1">Password</InputLabel>
             <Input id="my-input1" onChange={e=>setData({...data,password:e.target.value})} value={data.password}/>
-            </FormControl>
+            </FormControl><br/>
             <FormControl>
             <InputLabel htmlFor="my-input2">Confirm Password</InputLabel>
             <Input id="my-input2" onChange={e=>setData({...data,password1:e.target.value})} value={data.password1} aria-describedby="my-helper-text1" />
