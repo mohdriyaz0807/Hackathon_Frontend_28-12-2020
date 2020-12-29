@@ -10,10 +10,10 @@ const Reset =() =>{
     const random = href[href.length-1]
     const param=href[href.length-2]!=='admin'?'reset':'admin/reset'
     const [data,setData]=useState({password:"",password1:"",randomstring:random})
-    const submit = async ()=>{
+    const submit = data[0]===data[1] ? async ()=>{
     const res= await axios.post(`${url}/${param}`,data)
     console.log(res.data)
-    }
+    }:alert('Password Mismatch!')
 
     return(
         <div>
