@@ -47,8 +47,12 @@ const String=()=>{
     let url='https://pizza-apps-backend.herokuapp.com'
     const href = window.location.href.split('/')
     const requiredstring = href[href.length-1]
-    const res= axios.get(`${url}/confirm/${requiredstring}`)
+    const show=async()=>{
+    const res=await axios.get(`${url}/confirm/${requiredstring}`)
     console.log(res.data)
+    }
+    {show}
+
 }
 
 export  {Login,String,}

@@ -43,11 +43,16 @@ const Admin =() =>{
 }
 
 const Strings=()=>{
+  
     let url='https://pizza-apps-backend.herokuapp.com'
     const href = window.location.href.split('/')
     const requiredstring = href[href.length-1]
-    const res= axios.get(`${url}/adminconfirm/${requiredstring}`)
+    const show=async()=>{
+    const res = await axios.get(`${url}/adminconfirm/${requiredstring}`)
     console.log(res.data)
+    }
+    {show}
+    
 }
 
 export  {Admin,Strings,}
