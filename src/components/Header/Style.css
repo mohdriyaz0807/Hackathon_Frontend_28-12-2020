@@ -6,9 +6,14 @@
     width:100%;
     background-color:tomato;
     color: white;
-    text-align: center;
     padding: 20px;
+    text-align:center
 }
 .Link{
     float: right;
+}
+.Title{
+    font-family: fantasy;
+    font-size: xx-large;
+    margin: auto;
 }

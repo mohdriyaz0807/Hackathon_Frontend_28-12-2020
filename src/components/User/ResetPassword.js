@@ -30,8 +30,8 @@ const Reset =() =>{
     return(
         <div className={classes.root}>
         <Grid container spacing={2}>
-          <Grid item xs={4}></Grid>
-        <Grid item xs={4}>
+          <Grid item sm={4} xs={12}></Grid>
+        <Grid item sm={4} xs={12}>
         <Paper className={classes.paper}>
             <FormControl>
             <InputLabel htmlFor="my-input1">Password</InputLabel>

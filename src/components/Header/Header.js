@@ -1,16 +1,16 @@
 import React from 'react';
 import './Style.css'
-import {Toolbar, Typography, Button } from "@material-ui/core";
+import {Toolbar, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 function Header(){
     return( 
         <div className='Head'>
-          <Toolbar>
-            <Typography className='Title'>
+            <span className='Title'>
               Pizza Corner
-            </Typography>
+            </span>
             <div className='Link'>
+          <Toolbar>
             <Link to="/">
               <Button variant="contained" color="primary">Home</Button>
             </Link>
@@ -20,8 +20,8 @@ function Header(){
             <Link to="/login">
               <Button variant="contained" color="primary">Login</Button>
             </Link>
-            </div>
           </Toolbar>
+            </div>
         </div>
       )
 }

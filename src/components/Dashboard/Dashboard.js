@@ -1,108 +1,107 @@
 import React from 'react';
-import {Paper , Grid ,makeStyles,Button} from '@material-ui/core';
-import TransitionsModal from './Modal'
-import Logout from '../User/logout'
+import PropTypes from 'prop-types';
+import SwipeableViews from 'react-swipeable-views';
+import { makeStyles, useTheme , AppBar, Tabs, Tab,Typography,Box} from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
+import MakeOrder from './MakeOrder'
+import YourOrders from './YourOrders'
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      padding: theme.spacing(4),
-      flexGrow: 1,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    },
-    icon:{
-        width:'50px'
-    }
-  }));
-
-  const Dashboard=()=>{
-    const classes = useStyles();
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
   return (
-    <div className={classes.root}>
-        <Logout/>
-      <h1>Make Your Pizza by selecting below ingredients</h1><br/>
-      <Grid container spacing={3}>
-      <Grid item xs={1} >
-      <Paper className={classes.paper}><img className={classes.icon} src='https://cdn4.iconfinder.com/data/icons/food-and-drink-1-2/64/pizza-food-italian-meal-512.png' alt='pizza Base'/></Paper>
-        </Grid>
-        <Grid item xs={2} >
-          <label ><Button ><Paper className={classes.paper}>NY Style Pizza</Paper></Button></label>
-        <input type='radio' name='base'/>
-        </Grid>
-        <Grid item xs={2} >
-          <label ><Button ><Paper className={classes.paper}>Neapolitan Crust</Paper></Button></label>
-        <input type='radio' name='base'/>
-        </Grid>
-        <Grid item xs={2} >
-          <label ><Button ><Paper className={classes.paper}> Chicago Deep Dish</Paper></Button></label>
-        <input type='radio' name='base'/>
-        </Grid>
-        <Grid item xs={2} >
-          <label ><Button ><Paper className={classes.paper}>Sicilian Style</Paper></Button></label>
-        <input type='radio' name='base'/>
-        </Grid>
-        <Grid item xs={2} >
-          <label ><Button ><Paper className={classes.paper}>Thin Crust</Paper></Button></label>
-        <input type='radio' name='base'/>
-        </Grid>
-        </Grid>
-        <Grid container spacing={3}>
-      <Grid item xs={1} >
-      <Paper className={classes.paper}><img className={classes.icon} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi9K-enDiE2tgJAW7bhIjsLkdW8DPOmmjLfw&usqp=CAU' alt='sauce'/></Paper>
-        </Grid>
-        <Grid item xs={2} >
-          <label ><Button ><Paper className={classes.paper}>Pesto</Paper></Button></label>
-        <input type='radio' name='sauce'/>
-        </Grid>
-        <Grid item xs={2} >
-          <label ><Button ><Paper className={classes.paper}>Hummus</Paper></Button></label>
-        <input type='radio' name='sauce'/>
-        </Grid>
-        <Grid item xs={2} >
-          <label ><Button ><Paper className={classes.paper}> Buffalo Sauce</Paper></Button></label>
-        <input type='radio' name='sauce'/>
-        </Grid>
-        <Grid item xs={2} >
-          <label ><Button ><Paper className={classes.paper}>Marinara Sauce</Paper></Button></label>
-        <input type='radio' name='sauce'/>
-        </Grid>
-        <Grid item xs={2} >
-          <label ><Button ><Paper className={classes.paper}>Garlic Ranch</Paper></Button></label>
-        <input type='radio' name='sauce'/>
-        </Grid>
-        </Grid>
-        <Grid container spacing={3}>
-      <Grid item xs={1} >
-      <Paper className={classes.paper}><img className={classes.icon} src='https://cdn0.iconfinder.com/data/icons/foody-icons/32/FoodyIcons_color-04-512.png' alt='cheese'/></Paper>
-        </Grid>
-        <Grid item xs={2} >
-          <label ><Button ><Paper className={classes.paper}>Mozzarella</Paper></Button></label>
-        <input type='radio' name='sauce'/>
-        </Grid>
-        <Grid item xs={2} >
-          <label ><Button ><Paper className={classes.paper}>Gorgonzola</Paper></Button></label>
-        <input type='radio' name='sauce'/>
-        </Grid>
-        <Grid item xs={2} >
-          <label ><Button ><Paper className={classes.paper}> Pecorino-Romano</Paper></Button></label>
-        <input type='radio' name='sauce'/>
-        </Grid>
-        <Grid item xs={2} >
-          <label ><Button ><Paper className={classes.paper}>Havarti</Paper></Button></label>
-        <input type='radio' name='sauce'/>
-        </Grid>
-        </Grid>
-        <Grid container spacing={3}>
-        <Grid item xs={3} ></Grid>
-        <Grid item xs={6} >
-          <label ><Paper className={classes.paper}><TransitionsModal/></Paper></label>
-        </Grid>
-        </Grid>
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
     </div>
   );
 }
-export default Dashboard;
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `full-width-tab-${index}`,
+    'aria-controls': `full-width-tabpanel-${index}`,
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: theme.palette.background.paper,
+    width: '100%',
+  },
+  roots: {
+    backgroundColor: theme.palette.background.paper,
+    width: 500,
+    margin: 'auto',
+    marginTop:'15%',
+    marginBottom:'15%'
+  }
+}));
+
+function Dashboard() {
+  const classes = useStyles();
+  const theme = useTheme();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  let id=window.location.href.split('?')
+  const handleChangeIndex = (index) => {
+    setValue(index);
+  };
+  if(localStorage.getItem('token')===(id[1].split('&')[2])){
+  return (
+    <div className={classes.root}>
+      <AppBar position="static" color="default">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="fullWidth"
+          aria-label="full width tabs example"
+        >
+          <Tab label="Create New" {...a11yProps(0)} />
+          <Tab label="Existing Order" {...a11yProps(1)} />
+        </Tabs>
+      </AppBar>
+      <SwipeableViews
+        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        index={value}
+        onChangeIndex={handleChangeIndex}
+      >
+        <TabPanel value={value} index={0} dir={theme.direction}>
+          <MakeOrder name={id[1].split('&')[1]}/>
+        </TabPanel>
+        <TabPanel value={value} index={1} dir={theme.direction}>
+          <YourOrders id={id[1].split('&')[0]}/>
+        </TabPanel>
+      </SwipeableViews>
+    </div>
+  )}
+  else{
+    return(
+      <div className={classes.roots}>
+          <Alert severity="info">Your session Ended , Please Login Again</Alert>
+      </div>
+    )
+  }
+}
+
+export default Dashboard

@@ -24,14 +24,14 @@ const Login =() =>{
     const res= await axios.post(`${url}/login`,data)
     console.log(res.data)
     localStorage.setItem('token', res.data.token)
-    window.location.href='./Dashboard'
+    window.location.href=`/Dashboard?${res.data.result._id}&${res.data.result.name}&${res.data.token}`
     }
     const classes = useStyles()
     return(
         <div className={classes.root}>
           <Grid container spacing={2}>
-            <Grid item xs={4}></Grid>
-          <Grid item xs={4}>
+            <Grid item sm={4} xs={12}></Grid>
+          <Grid item sm={4} xs={12}>
           <Paper className={classes.paper}>
             <FormControl >
             <InputLabel htmlFor="my-input">Email address</InputLabel>
@@ -71,4 +71,4 @@ const String=()=>{
 
 }
 
-export  {Login,String,}
+export  {Login ,String}

@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {Login,String} from './components/User/login'
 import Register from './components/User/Register'
 import Forgot from './components/User/ForgotPassword'
-import Dashboard from './components/Dashboard/Dashboard'
 import Reset from './components/User/ResetPassword'
+import Dashboard from './components/Dashboard/Dashboard'
 import Home from './components/Home/Home'
 import {Admin,Strings} from './components/Admin/Admin'
 import Header from './components/Header/Header'
@@ -26,7 +26,7 @@ function App() {
           <Login/>
         </Route>
         <Route exact path="/Dashboard">
-          <Dashboard/>
+          <Dashboard />
         </Route>
         <Route path="/Register/admin">
           <Register/>
