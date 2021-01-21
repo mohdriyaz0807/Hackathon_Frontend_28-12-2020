@@ -5,11 +5,12 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
-const Sauce=()=> {
+const Sauce=(props)=> {
   const [value, setValue] = useState('Pesto');
 
   const handleChange = (event) => {
     setValue(event.target.value);
+    props.getName(event.target.value,"sauce")
   };
 
   return (

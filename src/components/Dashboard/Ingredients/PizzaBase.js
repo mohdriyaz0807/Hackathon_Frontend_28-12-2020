@@ -5,11 +5,12 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
-const PizzaBase=()=> {
+  const PizzaBase=(props)=> {
   const [value, setValue] = React.useState('NY Style Pizza');
 
   const handleChange = (event) => {
     setValue(event.target.value);
+    props.getName(event.target.value,"base")
   };
 
   return (

@@ -29,7 +29,7 @@ const YourOrders = (props) => {
     let res = await axios.get(`${url}/yourorders/${props.id}`)
     console.log(res)
 
-    if(res.result){
+    if(res.result.data.orders){
     return (
         <TableContainer component={Paper}>
       <Table className={classes.table} size="small" aria-label="a dense table">
@@ -41,7 +41,7 @@ const YourOrders = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {res.result.data.map((row) => (
+          {res.result.data.orders.map((row) => (
             <TableRow key={row.name}>
               <TableCell>{row._id}</TableCell>
               <TableCell component="th" scope="row">{row.name}</TableCell>

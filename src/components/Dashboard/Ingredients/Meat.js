@@ -16,29 +16,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Meat() {
+export default function Meat(props) {
   const classes = useStyles();
-  const [state, setState] = React.useState([]);
+  const [state, setState] = React.useState({list : [{value:' Pepperoni' ,isChecked:false },{value:'Hot Soppressata' ,isChecked:false },{value:'Sausage' ,isChecked:false },{value:'Bacon' ,isChecked:false },{value:'Prosciutto' ,isChecked:false },{value:'Meatballs' ,isChecked:false },{value:'Buffalo Chicken' ,isChecked:false }]});
 
 
   const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+    state.list.forEach(element=>{
+      if(element.value===event.target.name){
+        element.isChecked = event.target.checked
+    }
+  })
+    setState({list:state.list})
+    props.getName(state.list,"meat")
   };
 
-  const arr = ['Pepperoni','Hot Soppressata','Sausage','Bacon','Prosciutto','Meatballs','Buffalo Chicken'];
-  const error = [...state].filter((v) => v).length > 1;
-
-  const mapped = arr.map((e ) => 
+  const mapped = state.list.map((e ) => 
       <FormControlLabel
         key={e}
-        control={<Checkbox checked={false} onChange={handleChange} name = {e} />}
-        label = {e}
+        control={<Checkbox checked={e.isChecked} onChange={handleChange} name = {e.value} />}
+        label = {e.value}
       />
     )
 
   return (
     <div className={classes.root}>
-      <FormControl required error={error} component="fieldset" className={classes.formControl}>
+      <FormControl required error component="fieldset" className={classes.formControl}>
         <FormLabel component="legend"><h2>You can Choose any 1 Meat for Free</h2></FormLabel>
         <FormGroup>{mapped}</FormGroup>
         <FormHelperText><h3>More than 1 Meat Costs as per pricing...</h3></FormHelperText>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -16,29 +16,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Veggies() {
+export default function Veggies(props) {
   const classes = useStyles();
-  const arr = [ 'Spinach', 'Mushrooms', 'Onions', 'Fresh_tomatoes', 'Zucchini', 'Artichoke_hearts', 'Garlic', 'Sundried_tomatoes', 'Jalapeños', 'Green_peppers', 'Olives' ];
-  const [state, setState] = React.useState(arr);
-
-
+  const [state, setState] = useState({list : [{value:' Spinach' ,isChecked:false },{value:'Mushrooms' ,isChecked:false },{value:'Onions' ,isChecked:false },{value:'Fresh_tomatoes' ,isChecked:false },{value:'Zucchini' ,isChecked:false },{value:'Artichoke_hearts' ,isChecked:false },{value:'Garlic' ,isChecked:false },{value:'Sundried_tomatoes' ,isChecked:false },{value:'Jalapeños' ,isChecked:false },{value:'Green_peppers' ,isChecked:false },{value:'Olives' ,isChecked:false }]});
   const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+    state.list.forEach(element=>{
+      if(element.value===event.target.name){
+        element.isChecked = event.target.checked
+    }
+  })
+    setState({list:state.list})
+    props.getName(state.list,"veggies")
   };
 
-  const error = [...state].filter((v) => v).length > 3;
-
-  const mapped = arr.map((e ) => 
+  const mapped = state.list.map((val,k ) => 
       <FormControlLabel
-        key={e}
-        control={<Checkbox checked={false} onChange={handleChange} name = {e}  />}
-        label = {e}
+        key={k}
+        control={<Checkbox checked={val.isChecked} onChange={handleChange} name = {val.value}  />}
+        label = {val.value}
       />
     )
 
   return (
     <div className={classes.root}>
-      <FormControl required error={error} component="fieldset" className={classes.formControl}>
+      <FormControl required error component="fieldset" className={classes.formControl}>
         <FormLabel component="legend"><h2>You can Choose any 3 Veggies for Free</h2></FormLabel>
         <FormGroup >{mapped}</FormGroup>
         <FormHelperText><h3>More than 3 Veggie Costs as per pricing...</h3></FormHelperText>
