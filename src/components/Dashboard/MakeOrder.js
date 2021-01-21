@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
         const classes = useStyles();
         const [item, setItem] = useState('');
         const [displayed,setDisplayed] = useState('none')
-        const [order,setOrder] = useState({name:'',base:'',sauce:'',cheese:'',veggies:'',meat:''})
+        const [order,setOrder] = useState({name:'',base:'',sauce:'',cheese:'',veggies:'',meat:'',status:'pending'})
         let id=window.location.href.split('?')[1].split('&')[0]
         const submit = async ()=>{
           const res= await axios.post(`${url}/makeorder/${id}`,order)

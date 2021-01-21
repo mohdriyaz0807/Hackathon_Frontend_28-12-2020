@@ -25,8 +25,9 @@ const YourOrders = (props) => {
   const classes1 = useStyles1();
 
   let url='https://pizza-apps-backend.herokuapp.com'
+  let id=window.location.href.split('?')[1].split('&')[0]
     let show = async ()=>{
-    let res = await axios.get(`${url}/yourorders/${props.id}`)
+    let res = await axios.get(`${url}/yourorders/${id}`)
     console.log(res)
 
     if(res.result.data.orders){
@@ -44,7 +45,12 @@ const YourOrders = (props) => {
           {res.result.data.orders.map((row) => (
             <TableRow key={row.name}>
               <TableCell>{row._id}</TableCell>
-              <TableCell component="th" scope="row">{row.name}</TableCell>
+              <TableCell component="th" scope="row">
+                <ul>
+                {row.orders.map((e)=>{
+                  <li>e</li>
+                })}</ul>
+                </TableCell>
               <TableCell>{row.status}</TableCell>
             </TableRow>
           ))}
@@ -55,7 +61,7 @@ const YourOrders = (props) => {
     }else{
         return (
             <div className={classes1.root}>
-            <Alert severity="info">No orders found from your Id!</Alert>
+            <Alert severity="info">No orders found ! Make one now to enjoy the treat</Alert>
           </div> )
           }
         }
