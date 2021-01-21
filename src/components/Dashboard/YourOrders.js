@@ -47,9 +47,9 @@ const YourOrders = (props) => {
               <TableCell>{row._id}</TableCell>
               <TableCell component="th" scope="row">
                 <ul>
-                {row.orders.map((e)=>{
+                {row.orders.map((e)=>(
                   <li>e</li>
-                })}</ul>
+                ))}</ul>
                 </TableCell>
               <TableCell>{row.status}</TableCell>
             </TableRow>

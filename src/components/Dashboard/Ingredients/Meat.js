@@ -33,7 +33,7 @@ export default function Meat(props) {
 
   const mapped = state.list.map((e ) => 
       <FormControlLabel
-        key={e}
+        key={e.value}
         control={<Checkbox checked={e.isChecked} onChange={handleChange} name = {e.value} />}
         label = {e.value}
       />
