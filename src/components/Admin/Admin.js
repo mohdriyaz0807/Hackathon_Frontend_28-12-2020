@@ -8,6 +8,12 @@ const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(4),
     flexGrow: 1,
+    marginBottom:'15%',
+  },
+  firstline:{
+    textAlign:'center',
+      fontSize:'150%',
+      fontFamily:'serif',
   },
   paper: {
     padding: theme.spacing(2),
@@ -29,9 +35,10 @@ const Admin =() =>{
     return(
         <div className={classes.root}>
           <Grid container spacing={2}>
-            <Grid item sm={4} xs={12}></Grid>
-          <Grid item sm={4} xs={12}>
+            <Grid item sm={3} xs={12} md={4}></Grid>
+          <Grid item sm={6} xs={12} md={4}>
           <Paper className={classes.paper}>
+          <h1 className={classes.firstline}>Admin Login</h1>
             <FormControl >
             <InputLabel htmlFor="my-input">Email address</InputLabel>
             <Input type='email' id="my-input" aria-describedby="my-helper-text" onChange={e=>setData({...data,email:e.target.value})} value={data.email}/>
@@ -42,7 +49,7 @@ const Admin =() =>{
             <FormHelperText id="my-helper-text1">Keep your Password safe !</FormHelperText>
             </FormControl><br/><br/>
             <FormControl>
-            <Button variant="contained" color="primary"  onClick={submit}>Submit</Button>
+            <Button variant="contained" color="secondary"  onClick={submit}>Submit</Button>
             </FormControl><br/><br/>
             <FormControl>
             <Link to='./Register/admin'>New User?</Link>

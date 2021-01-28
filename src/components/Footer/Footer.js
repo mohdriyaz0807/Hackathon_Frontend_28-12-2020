@@ -6,7 +6,7 @@ function Footer() {
   return (
     <footer className="footer">
       <Toolbar>
-        <Typography variant="h6">Hurry Up if Hungry<br/> 2021 Pizza Corner.All rights reserved.<br/>Food shown are for illustration purpose only. Actual product may differ from the images shown in this website. Our menu prices are now inclusive of GST.</Typography>
+        <Typography><p>Hurry Up if Hungry</p><p> &copy; 2021 Pizza Corner.All rights reserved.</p><p>Food shown are for illustration purpose only. Actual product may differ from the images shown in this website. Our menu prices are now inclusive of GST.</p></Typography>
       </Toolbar>
     </footer>
   )

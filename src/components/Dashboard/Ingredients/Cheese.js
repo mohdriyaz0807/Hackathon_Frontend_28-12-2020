@@ -6,7 +6,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
 const Cheese=(props)=> {
-  const [value, setValue] = useState('Mozzarella');
+  const [value, setValue] = useState('');
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -21,6 +21,7 @@ const Cheese=(props)=> {
         <FormControlLabel value="Gorgonzola" control={<Radio />} label="Gorgonzola" />
         <FormControlLabel value="Pecorino-Romano" control={<Radio />} label="Pecorino-Romano" />
         <FormControlLabel value="Havarti" control={<Radio />} label="Havarti" />
+        <FormControlLabel value="Cheddar" control={<Radio />} label="Cheddar" />
       </RadioGroup>
     </FormControl>
   );

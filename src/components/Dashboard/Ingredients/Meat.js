@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -18,17 +18,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Meat(props) {
   const classes = useStyles();
-  const [state, setState] = React.useState({list : [{value:' Pepperoni' ,isChecked:false },{value:'Hot Soppressata' ,isChecked:false },{value:'Sausage' ,isChecked:false },{value:'Bacon' ,isChecked:false },{value:'Prosciutto' ,isChecked:false },{value:'Meatballs' ,isChecked:false },{value:'Buffalo Chicken' ,isChecked:false }]});
-
-
+  const [state, setState] = useState({list : [{value:' Pepperoni' ,isChecked:false },{value:'Hot Soppressata' ,isChecked:false },{value:'Sausage' ,isChecked:false },{value:'Bacon' ,isChecked:false },{value:'Prosciutto' ,isChecked:false },{value:'Meatballs' ,isChecked:false },{value:'Buffalo Chicken' ,isChecked:false }]});
+  const [meatlist,setmeatlist]=useState([])
   const handleChange = (event) => {
     state.list.forEach(element=>{
       if(element.value===event.target.name){
         element.isChecked = event.target.checked
+        if(element.isChecked){
+          setmeatlist([...meatlist,(element.value)])
+        }else{
+          meatlist.splice(meatlist.indexOf(element.value),1)
+        }
     }
   })
     setState({list:state.list})
-    props.getName(state.list,"meat")
+    props.getName(meatlist,"meat")
   };
 
   const mapped = state.list.map((e ) => 

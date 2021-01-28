@@ -1,9 +1,6 @@
-.first{
-    margin-top: 5%;
-}
-
-@media only screen and (max-width:520){
-img#carousel{
-    display: none;
-}
+.head{
+    font-size: 150%;
+    margin:15% 25% 0 0;
+    color:white;
+    font-style: oblique;
 }

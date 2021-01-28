@@ -1,11 +1,16 @@
 .footer{
     position: relative;
-    left:0;
     bottom: 0;
-    right: 0;
-    background-color: slategray;
+    left:0;
+    padding: 20px;
+    width: 100%;
+    background-color: dodgerblue;
     color: white;
-    text-align: center;
-    font-size:xx-small;
-    padding: 1rem
+    font-style: oblique;
+    font-size: 120%;
+}
+p{
+margin: auto;
+text-align: center;
+font-weight: bold;
 }

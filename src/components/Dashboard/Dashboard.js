@@ -48,8 +48,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     width: 500,
     margin: 'auto',
-    marginTop:'15%',
-    marginBottom:'15%'
+    marginTop:'25%',
+    marginBottom:'25%',
+    paddingBlock:'5%',
   }
 }));
 
@@ -78,7 +79,7 @@ function Dashboard() {
           aria-label="full width tabs example"
         >
           <Tab label="Create New" {...a11yProps(0)} />
-          <Tab label="Existing Order" {...a11yProps(1)} />
+          <Tab label="Cart" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <SwipeableViews

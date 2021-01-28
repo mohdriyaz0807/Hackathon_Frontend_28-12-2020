@@ -7,6 +7,11 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(4),
       flexGrow: 1,
     },
+    firstline:{
+      textAlign:'center',
+      fontSize:'150%',
+      fontFamily:'serif'
+    },
     paper: {
       padding: theme.spacing(5),
       textAlign: 'center',
@@ -28,9 +33,10 @@ const Register = () =>{
     return(
         <div className={classes.root}>
         <Grid container spacing={2}>
-          <Grid item sm={4} xs={12}></Grid>
-        <Grid item sm={4} xs={12}>
+          <Grid item sm={3} xs={12} md={4}></Grid>
+        <Grid item sm={6} xs={12} md={4}>
         <Paper className={classes.paper}>
+          <h3 className={classes.firstline}>Register yourself</h3>
             <FormControl >
             <InputLabel htmlFor="my-name">Full Name</InputLabel>
             <Input type='text' id="my-name" onChange={e=>setData({...data,name:e.target.value})} value={data.name}/>

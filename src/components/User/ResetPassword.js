@@ -6,6 +6,12 @@ const useStyles = makeStyles((theme) => ({
     root: {
       padding: theme.spacing(4),
       flexGrow: 1,
+      marginBottom:'15%',
+    },
+    firstline:{
+      textAlign:'center',
+      fontSize:'150%',
+      fontFamily:'serif',
     },
     paper: {
       padding: theme.spacing(2),
@@ -30,9 +36,10 @@ const Reset =() =>{
     return(
         <div className={classes.root}>
         <Grid container spacing={2}>
-          <Grid item sm={4} xs={12}></Grid>
-        <Grid item sm={4} xs={12}>
+          <Grid item sm={3} xs={12} md={4}></Grid>
+        <Grid item sm={6} md={4} xs={12}>
         <Paper className={classes.paper}>
+        <h1 className={classes.firstline}>Reset Password</h1>
             <FormControl>
             <InputLabel htmlFor="my-input1">Password</InputLabel>
             <Input type='password' id="my-input1" onChange={e=>setData({...data,password:e.target.value})} value={data.password}/>

@@ -18,20 +18,26 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Veggies(props) {
   const classes = useStyles();
-  const [state, setState] = useState({list : [{value:' Spinach' ,isChecked:false },{value:'Mushrooms' ,isChecked:false },{value:'Onions' ,isChecked:false },{value:'Fresh_tomatoes' ,isChecked:false },{value:'Zucchini' ,isChecked:false },{value:'Artichoke_hearts' ,isChecked:false },{value:'Garlic' ,isChecked:false },{value:'Sundried_tomatoes' ,isChecked:false },{value:'Jalapeños' ,isChecked:false },{value:'Green_peppers' ,isChecked:false },{value:'Olives' ,isChecked:false }]});
+  const [state, setState] = useState({list : [{value:' Spinach' ,isChecked:false },{value:'Mushrooms' ,isChecked:false },{value:'Onions' ,isChecked:false },{value:'Fresh_tomatoes' ,isChecked:false },{value:'Zucchini' ,isChecked:false },{value:'Artichoke_hearts' ,isChecked:false },{value:'Garlic' ,isChecked:false }]});
+  const [veglist,setveglist]=useState([])
   const handleChange = (event) => {
     state.list.forEach(element=>{
       if(element.value===event.target.name){
         element.isChecked = event.target.checked
+        if(element.isChecked){
+          setveglist([...veglist,(element.value)])
+        }else{
+          veglist.splice(veglist.indexOf(element.value),1)
+        }
     }
   })
-    setState({list:state.list})
-    props.getName(state.list,"veggies")
+  setState({list:state.list})
+  props.getName(veglist,"veggies")
   };
 
-  const mapped = state.list.map((val,k ) => 
+  const mapped = state.list.map((val ) => 
       <FormControlLabel
-        key={k}
+        key={val.value}
         control={<Checkbox checked={val.isChecked} onChange={handleChange} name = {val.value}  />}
         label = {val.value}
       />
