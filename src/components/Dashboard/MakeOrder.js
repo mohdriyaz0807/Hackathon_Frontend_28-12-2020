@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
       }
     }
     console.log(count,order)
-    if(count==6){
+    if(count>=6){
       setsubmitbutton('Loading...')
       setOrder({...order,status:'Payment pending'})
       const res= await axios.post(`${url}/makeorder/${id}`,order)

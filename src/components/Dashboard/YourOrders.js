@@ -59,18 +59,18 @@ const YourOrders = (props) => {
           {order.map((row) => (
             <TableRow key={row._id}>
               <TableCell component="th" scope="row">
-                  <h2>{row.orderItems.name}</h2>
+                  <h2>{row.name}</h2>
                 <ul>
-                  <li>{row.orderItems.base}</li>
-                  <li>{row.orderItems.sauce}</li>
-                  <li>{row.orderItems.cheese}</li>
-                  <li>{row.orderItems.veggies.join(', ')}</li>
-                  <li>{row.orderItems.meat.join(', ')}</li>
+                  <li>{row.base}</li>
+                  <li>{row.sauce}</li>
+                  <li>{row.cheese}</li>
+                  <li>{row.veggies.join(', ')}</li>
+                  <li>{row.meat.join(', ')}</li>
                 </ul>
                 </TableCell>
-              <TableCell><h2>RS: {eval((row.orderItems.veggies.length*25)+(row.orderItems.meat.length*25)+150)}</h2></TableCell>
+              <TableCell><h2>RS: {eval((row.veggies.length*25)+(row.meat.length*25)+150)}</h2></TableCell>
               <TableCell>
-                {row.orderItems.status} 
+                {row.status} 
                 <Link to="/paymentgateway">
               <Button size='large' variant="text" color="primary">Pay Now</Button>
               </Link>
