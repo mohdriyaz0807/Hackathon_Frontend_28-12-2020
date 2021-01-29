@@ -1,28 +1,36 @@
 import React from 'react';
 import './Style.css'
-import {Toolbar, Button } from "@material-ui/core";
+import {Grid,ListItem,ListItemIcon } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import HomeIcon from '@material-ui/icons/Home';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import FaceIcon from '@material-ui/icons/Face';
 
 function Header(){
     return( 
-        <div className='Head'>
-            <span className='Title'>
+        <Grid container className="Head">
+            <Grid item xs={12} sm={6} md={6} className="Title">
               Pizza Corner
-            </span>
-            <div className='Link'>
-          <Toolbar>
-            <Link to="/">
-              <Button variant="contained" color="primary">Home</Button>
-            </Link>
-            <Link to="/admin">
-              <Button variant="contained" color="primary">Admin</Button>
-            </Link>
-            <Link to="/login">
-              <Button variant="contained" color="primary">Login</Button>
-            </Link>
-          </Toolbar>
-            </div>
-        </div>
+            </Grid>
+            <Grid item xs={4} sm={2} md={2}>
+              <ListItem>
+              <ListItemIcon><Link to="/" ><HomeIcon fontSize="large" color="primary"/></Link>
+                <br/><span className="Link">Home</span></ListItemIcon>
+              </ListItem>
+            </Grid>
+            <Grid item xs={4} sm={2} md={2}>
+            <ListItem>
+              <ListItemIcon><Link to="/admin" ><SupervisorAccountIcon fontSize="large" color="primary"/></Link>
+                <br/><span className="Link">Admin</span></ListItemIcon>
+              </ListItem>
+            </Grid>
+            <Grid item xs={4} sm={2} md={2}>
+            <ListItem>
+              <ListItemIcon><Link to="/login" ><FaceIcon fontSize="large" color="primary"/></Link>
+                <br/><span className="Link">User</span></ListItemIcon>
+              </ListItem>
+            </Grid>
+        </Grid>
       )
 }
 export default Header

@@ -4,11 +4,11 @@ import './Footstyle.css'
 
 function Footer() {
   return (
-    <footer className="footer">
+    <div className="footer">
       <Toolbar>
-        <Typography><p>Hurry Up if Hungry</p><p> &copy; 2021 Pizza Corner.All rights reserved.</p><p>Food shown are for illustration purpose only. Actual product may differ from the images shown in this website. Our menu prices are now inclusive of GST.</p></Typography>
+        <Typography><p style={{fontSize:'15px'}}>Food shown are for illustration purpose only. Actual product may differ from the images shown in this website. Our menu prices are now inclusive of GST.</p><p>Hurry Up if Hungry</p><p> &copy; {new Date().getFullYear()} Pizza Corner.All rights reserved.</p></Typography>
       </Toolbar>
-    </footer>
+    </div>
   )
 }
 

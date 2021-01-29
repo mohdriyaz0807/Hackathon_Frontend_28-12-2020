@@ -6,8 +6,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(4),
     flexGrow: 1,
-    marginTop:'20%',
-    marginBottom:'30%',
+    marginTop:'15%',
+    marginBottom:'35%',
   },
   paper: {
     padding: theme.spacing(2),
@@ -23,7 +23,7 @@ const Home=()=>{
   return (
     <section className={classes.root}>
       <Grid container>
-        <Grid item xs={2} sm={3} md={4}></Grid>
+        <Grid item xs={1} sm={3} md={4}></Grid>
         <Grid item xs={10} sm={6} md={4} >
           <Paper className={classes.paper}>
       <h3>Try our Pizza ? Register and Login to access your treat.</h3>

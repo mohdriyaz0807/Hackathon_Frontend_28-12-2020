@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
@@ -29,6 +30,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy":"https://pizza-apps-backend.herokuapp.com",
   "eslintConfig": {
     "extends": [
       "react-app",
