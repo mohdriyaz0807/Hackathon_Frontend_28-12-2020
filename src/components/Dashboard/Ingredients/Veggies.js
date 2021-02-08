@@ -25,7 +25,7 @@ export default function Veggies(props) {
       if(element.value===event.target.name){
         element.isChecked = event.target.checked
         if(element.isChecked){
-          setveglist([...veglist,(element.value)])
+          setveglist(veglist=>[...veglist,(element.value)])
         }else{
           veglist.splice(veglist.indexOf(element.value),1)
         }

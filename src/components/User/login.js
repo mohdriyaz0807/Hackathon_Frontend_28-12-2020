@@ -21,16 +21,21 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
 }));
-
+ 
 
 const Login =() =>{
     let url='https://pizza-apps-backend.herokuapp.com'
     const [data,setData]=useState({email:"",password:""})
+    const [loading,setloading]=useState({show:'Login',disabled:false})
     const submit = async ()=>{
+    setloading({show:'Logging in...',disabled:true})
     const res= await axios.post(`${url}/login`,data)
     console.log(res.data)
     localStorage.setItem('token', res.data.token)
-    window.location.href=`/Dashboard?${res.data.result._id}&${res.data.result.name}&${res.data.token}`
+    localStorage.setItem('userdetails',JSON.stringify(res.data.result))
+    
+    setloading({show:'Login',disabled:false})
+    window.location.href='/Dashboard'
     }
     const classes = useStyles()
     return(
@@ -51,7 +56,7 @@ const Login =() =>{
             <FormHelperText id="my-helper-text1">Password is case sensitive</FormHelperText>
             </FormControl><br/><br/>
             <FormControl>
-            <Button variant="contained" color="primary"  onClick={submit}>Submit</Button>
+            <Button variant="contained" color="primary" disabled={loading.disabled}  onClick={submit}>{loading.show}</Button>
             </FormControl><br/><br/>
             <FormControl>
             <Link to='./Register'>New User?</Link>

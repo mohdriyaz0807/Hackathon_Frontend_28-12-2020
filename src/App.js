@@ -10,6 +10,7 @@ import {Admin,Strings} from './components/Admin/Admin'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import Error404 from './components/Error-404/404'
+import OrderPanel from './components/AdminDashboard/OrderPanel'
 
 function App() {
   return (
@@ -39,6 +40,9 @@ function App() {
         </Route>
         <Route exact path="/ForgotPassword/admin">
           <Forgot/>
+        </Route>
+        <Route exact path="/Orderpanel">
+        <OrderPanel/>
         </Route>
         <Route exact path="/ResetPassword/admin/:string">
           <Reset/>

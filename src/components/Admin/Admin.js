@@ -25,18 +25,21 @@ const useStyles = makeStyles((theme) => ({
 const Admin =() =>{
     let url='https://pizza-apps-backend.herokuapp.com'
     const [data,setData]=useState({email:"",password:""})
+    const [loading,setloading]=useState({show:'Login',disabled:false})
     const submit = async ()=>{
+      setloading({show:'Plese Wait..',disabled:true})
     const res= await axios.post(`${url}/adminlogin`,data)
     console.log(res.data)
     localStorage.setItem('admintoken', res.data.token)
-    window.location.href='./Dashboard'
+    setloading({show:'Login',disabled:false})
+    window.location.href='/Orderpanel'
     }
     const classes = useStyles()
     return(
         <div className={classes.root}>
           <Grid container spacing={2}>
-            <Grid item sm={3} xs={12} md={4}></Grid>
-          <Grid item sm={6} xs={12} md={4}>
+            <Grid item sm={2} xs={12} md={4}></Grid>
+          <Grid item sm={8} xs={12} md={4}>
           <Paper className={classes.paper}>
           <h1 className={classes.firstline}>Admin Login</h1>
             <FormControl >
@@ -49,14 +52,11 @@ const Admin =() =>{
             <FormHelperText id="my-helper-text1">Keep your Password safe !</FormHelperText>
             </FormControl><br/><br/>
             <FormControl>
-            <Button variant="contained" color="secondary"  onClick={submit}>Submit</Button>
+            <Button variant="contained" color="secondary" disabled={loading.disabled} onClick={submit}>{loading.show}</Button>
             </FormControl><br/><br/>
-            <FormControl>
-            <Link to='./Register/admin'>New User?</Link>
-            </FormControl><br/><br/>
-            <FormControl>
-            <Link to='./ForgotPassword/admin'>Forgot Password?</Link>
-            </FormControl>
+            <h4>For Login Purpose use below credentials</h4>
+            <p>Email : admin@pizzacorner.com</p>
+            <p>Password : 1234</p>
             </Paper>
             </Grid>
             </Grid>

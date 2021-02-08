@@ -25,14 +25,14 @@ export default function Meat(props) {
       if(element.value===event.target.name){
         element.isChecked = event.target.checked
         if(element.isChecked){
-          setmeatlist([...meatlist,(element.value)])
+          setmeatlist(meatlist=>[...meatlist,(element.value)])
         }else{
           meatlist.splice(meatlist.indexOf(element.value),1)
         }
     }
   })
-    setState({list:state.list})
-    props.getName(meatlist,"meat")
+  setState({list:state.list})
+  props.getName(meatlist,"meat")
   };
 
   const mapped = state.list.map((e ) => 

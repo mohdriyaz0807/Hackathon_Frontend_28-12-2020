@@ -8,9 +8,9 @@ import FormLabel from '@material-ui/core/FormLabel';
 const Cheese=(props)=> {
   const [value, setValue] = useState('');
 
-  const handleChange = (event) => {
+  const handleChange =async (event) => {
     setValue(event.target.value);
-    props.getName(event.target.value,"cheese")
+    await props.getName(event.target.value,"cheese")
   };
 
   return (

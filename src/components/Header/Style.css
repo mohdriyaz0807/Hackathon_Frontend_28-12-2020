@@ -10,10 +10,11 @@
 }
 
 .Link {
-    font-size: xx-large;
+    font-size: x-large;
     color: white;
     font-weight: bolder;
-    float:left
+    float:left;
+    text-decoration: none;
 }
 .Title{
     font-family: fantasy;

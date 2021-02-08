@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Paper , Grid ,FormControl,FormHelperText,Input,InputLabel,Button,makeStyles } from '@material-ui/core';
 import axios from 'axios'
+import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,9 +26,18 @@ const Register = () =>{
     const query = href[href.length-1]
     const param=query!=='admin'?'registeruser':'registeradmin'
     const [data,setData]=useState({name:"",mobile:"",email:"",password:""})
+    const [msg,setmsg]=useState({icon:'',message:'',load:'Register',disable:false})
     const submit = async ()=>{
-    const res= await axios.post(`${url}/${param}`,data)
+      setmsg({...msg,load:'Please Wait..',disable:true})
+    await axios.post(`${url}/${param}`,data)
+    .then((res)=>{
     console.log(res.data)
+    setData({...data,name:"",mobile:"",email:"",password:""})
+    setmsg({...msg,icon:res.data.icon,message:res.data.message,load:'Register',disable:false})
+  })
+    .catch((err)=>{
+      console.log(err)
+    })
     }
     const classes = useStyles()
     return(
@@ -54,7 +64,10 @@ const Register = () =>{
             <Input type='password' id="my-password" onChange={e=>setData({...data,password:e.target.value})} value={data.password} aria-describedby="my-helper-text1" />
             <FormHelperText id="my-helper-text1">Minimum 8 characters is<br/> considered as Strong Password</FormHelperText>
             </FormControl><br/><br/>
-            <Button variant="contained" color="primary" onClick={submit}>Submit</Button>
+            <Button variant="contained" color="primary" disabled={msg.disable} onClick={submit}>{msg.load}</Button>
+            {msg.icon!==''?<div className={classes.roots}>
+                <Alert severity={msg.icon}>{msg.message}</Alert>
+                </div>:''}
             </Paper>
             </Grid>
             </Grid>

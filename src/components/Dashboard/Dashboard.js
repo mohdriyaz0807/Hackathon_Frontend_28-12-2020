@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme , AppBar, Tabs, Tab,Typography,Box} from '@material-ui/core';
-import Alert from '@material-ui/lab/Alert';
 import MakeOrder from './MakeOrder'
 import YourOrders from './YourOrders'
 
@@ -62,11 +61,11 @@ function Dashboard() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  let id=window.location.href.split('?')
   const handleChangeIndex = (index) => {
     setValue(index);
   };
-  if(localStorage.getItem('token')===(id[1].split('&')[2])){
+  const userdetails=JSON.parse(localStorage.getItem('userdetails'))
+  console.log(userdetails);
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
@@ -88,21 +87,15 @@ function Dashboard() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <MakeOrder name={id[1].split('&')[1]}/>
+          <MakeOrder id={userdetails}/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <YourOrders id={id[1].split('&')[0]}/>
+          <YourOrders id={userdetails} />
         </TabPanel>
       </SwipeableViews>
     </div>
-  )}
-  else{
-    return(
-      <div className={classes.roots}>
-          <Alert severity="info">Your session Ended , Please Login Again</Alert>
-      </div>
-    )
-  }
+  )
+    
 }
 
 export default Dashboard

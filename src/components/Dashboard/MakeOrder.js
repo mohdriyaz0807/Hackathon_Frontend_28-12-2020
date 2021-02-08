@@ -1,12 +1,12 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import {Paper , Grid ,makeStyles,MenuItem,FormControl,InputLabel,Select,Button} from '@material-ui/core';
 import PizzaBase from './Ingredients/PizzaBase'
 import Sauce from './Ingredients/Sauce'
 import Cheese from './Ingredients/Cheese'
 import Veggies from './Ingredients/Veggies'
 import Meat from './Ingredients/Meat'
-import Logout from '../User/logout'
 import axios from 'axios'
+import Alert from '@material-ui/lab/Alert';
 import Swal from 'sweetalert2';
 
 
@@ -46,17 +46,16 @@ const useStyles = makeStyles((theme) => ({
   const MakeOrder=(props)=>{
     let url='https://pizza-apps-backend.herokuapp.com'
         const classes = useStyles();
-        const [order,setOrder] = useState({name:'',base:'',sauce:'',cheese:'',veggies:'',meat:'',status:''})
+        const [order,setOrder] = useState({name:'',base:'',sauce:'',cheese:'',veggies:'',meat:'',status:'Payment pending'})
         const [submitbutton,setsubmitbutton]=useState('Add to Cart')
-        let id=window.location.href.split('?')[1].split('&')[0]
-        
-    const handleChange = (event) => {
+        const [name] = useState(props.id.name)
+      const handleChange = (event) => {
     setOrder({...order,name:event.target.value})
   };
   const getorder = (name,ingridientType) => {
     setOrder({...order,[ingridientType]:name})
-    console.log(order);
   }
+  const[icon,seticon]=useState('')
   const submit = async ()=>{
     let count=7
     for(let x in order){
@@ -65,16 +64,22 @@ const useStyles = makeStyles((theme) => ({
       }
     }
     console.log(count,order)
-    if(count>=6){
+    if(count==7){
       setsubmitbutton('Loading...')
-      setOrder({...order,status:'Payment pending'})
-      const res= await axios.post(`${url}/makeorder/${id}`,order)
+      const res= await axios.post(`${url}/makeorder/${props.id._id}`,order,
+      {headers:{'authorization':localStorage.getItem('token')
+    }})
+      console.log(res);
+      seticon(res.icon)
       {SweetAlert('success','Your Order has added to the Cart')}
       setsubmitbutton('Add to Cart')
     }else{
       {SweetAlert('error','Please Select All Options')}
     }
 }
+// useEffect(()=>{
+//   getorder()
+// },order)
 const SweetAlert =(status,data)=>{
   Swal.fire({
     icon: status,
@@ -82,11 +87,12 @@ const SweetAlert =(status,data)=>{
     text: data,
 })
 }
+if(icon!=='error'){
   return (
     <div className={classes.root}>
       <Grid container spacing={3} >
         <Grid item md={9} xs={9} sm={9}>
-        <h1 >Welcome {props.name} !</h1>
+        <h1 >Welcome {name} !</h1>
         <h1>Make Your Pizza by selecting below ingredients</h1>
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-label" >Choose here..</InputLabel>
@@ -105,9 +111,6 @@ const SweetAlert =(status,data)=>{
         </Select>
       </FormControl>
       </Grid>
-        <Grid item md={3} xs={3} sm={3}>
-        <Logout/>
-        </Grid>
       </Grid>
       <Grid container spacing={3} >
         <Grid item xs={12} sm={6} md={4} lg={4} >
@@ -133,10 +136,16 @@ const SweetAlert =(status,data)=>{
         </Grid>
         <Grid container spacing={3} className={classes.cart} >
         <Grid item xs={12} sm={12} lg={12}>
-        <Button variant="contained" color="primary"  onClick={submit}>{submitbutton}</Button>
+        <Button variant="contained" color="primary"  onClick={submit} >{submitbutton}</Button>
         </Grid>
         </Grid>
     </div>
-  );
+  )}
+  else{
+  return(
+    <div className={classes.roots}>
+        <Alert severity="info">Your session Ended , Please Login Again</Alert>
+    </div>
+  )}
 }
 export default MakeOrder;

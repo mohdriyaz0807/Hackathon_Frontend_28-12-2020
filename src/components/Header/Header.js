@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import HomeIcon from '@material-ui/icons/Home';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import FaceIcon from '@material-ui/icons/Face';
+import Logout from '../User/logout'
 
 function Header(){
     return( 
@@ -14,20 +15,19 @@ function Header(){
             </Grid>
             <Grid item xs={4} sm={2} md={2}>
               <ListItem>
-              <ListItemIcon><Link to="/" ><HomeIcon fontSize="large" color="primary"/></Link>
-                <br/><span className="Link">Home</span></ListItemIcon>
+              <ListItemIcon><Link to="/" ><HomeIcon fontSize="large" color="primary"/>
+                <span className="Link">Home</span></Link></ListItemIcon>
               </ListItem>
             </Grid>
             <Grid item xs={4} sm={2} md={2}>
             <ListItem>
-              <ListItemIcon><Link to="/admin" ><SupervisorAccountIcon fontSize="large" color="primary"/></Link>
-                <br/><span className="Link">Admin</span></ListItemIcon>
+              <ListItemIcon><Link to="/admin" ><SupervisorAccountIcon fontSize="large" color="primary"/>
+                <span className="Link">Admin</span></Link></ListItemIcon>
               </ListItem>
             </Grid>
             <Grid item xs={4} sm={2} md={2}>
             <ListItem>
-              <ListItemIcon><Link to="/login" ><FaceIcon fontSize="large" color="primary"/></Link>
-                <br/><span className="Link">User</span></ListItemIcon>
+              {localStorage.getItem('token') ? <Logout/> : '' }
               </ListItem>
             </Grid>
         </Grid>

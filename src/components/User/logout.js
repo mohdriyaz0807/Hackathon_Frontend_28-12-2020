@@ -4,7 +4,8 @@ import {Button} from '@material-ui/core';
 const Logout=()=>{
 
     const logoff=()=>{
-    localStorage.setItem('token','')
+        ['token','userdetails'].forEach(key=>{
+    localStorage.removeItem(key)})
     window.location.href = './'
     }
     return(
