@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
       marginBlock:'auto',
     },
     margin:{
-      width:'250%',
+      width:'100%',
       marginBottom:'15%'
     },
     icon:{
@@ -34,8 +34,8 @@ const useStyles = makeStyles((theme) => ({
       paddingTop:'5%',
     },
     formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
+      marginLeft:'35%',
+      minWidth :'30%',
     },
     selectEmpty: {
       marginTop: theme.spacing(2),
@@ -66,13 +66,12 @@ const useStyles = makeStyles((theme) => ({
     console.log(count,order)
     if(count==7){
       setsubmitbutton('Loading...')
-      const res= await axios.post(`${url}/makeorder/${props.id._id}`,order,
-      {headers:{'authorization':localStorage.getItem('token')
-    }})
+      const res= await axios.post(`${url}/makeorder/${props.id._id}`,order)
       console.log(res);
       seticon(res.icon)
       {SweetAlert('success','Your Order has added to the Cart')}
       setsubmitbutton('Add to Cart')
+      props.change(1)
     }else{
       {SweetAlert('error','Please Select All Options')}
     }
@@ -87,15 +86,17 @@ const SweetAlert =(status,data)=>{
     text: data,
 })
 }
+
 if(icon!=='error'){
   return (
-    <div className={classes.root}>
+  <div className={classes.root}>
       <Grid container spacing={3} >
-        <Grid item md={9} xs={9} sm={9}>
-        <h1 >Welcome {name} !</h1>
-        <h1>Make Your Pizza by selecting below ingredients</h1>
+        <Grid item md={12} xs={12} sm={12}>
+        <h3 >Welcome {name} !
+        <br/>Make Your Pizza by selecting below ingredients</h3>
+      </Grid>
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label" >Choose here..</InputLabel>
+        <InputLabel id="demo-simple-select-label" >Name*</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -110,7 +111,7 @@ if(icon!=='error'){
           <MenuItem value='Indi Tandoori Paneer'>Indi Tandoori Paneer</MenuItem>
         </Select>
       </FormControl>
-      </Grid>
+      
       </Grid>
       <Grid container spacing={3} >
         <Grid item xs={12} sm={6} md={4} lg={4} >
@@ -147,5 +148,6 @@ if(icon!=='error'){
         <Alert severity="info">Your session Ended , Please Login Again</Alert>
     </div>
   )}
+
 }
 export default MakeOrder;

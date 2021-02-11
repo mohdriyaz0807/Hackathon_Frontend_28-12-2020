@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -32,16 +32,18 @@ export default function Veggies(props) {
     }
   })
   setState({list:state.list})
-  props.getName(veglist,"veggies")
   };
 
+  useEffect(() => {
+      props.getName(veglist,"veggies")
+  }, [veglist])
+
   const mapped = state.list.map((val ) => 
-      <FormControlLabel
-        key={val.value}
-        control={<Checkbox checked={val.isChecked} onChange={handleChange} name = {val.value}  />}
-        label = {val.value}
-      />
-    )
+  <FormControlLabel
+  key={val.value}
+  control={<Checkbox checked={val.isChecked} onChange={handleChange} name = {val.value}  />}
+  label = {val.value}
+  />)
 
   return (
     <div className={classes.root}>
@@ -53,3 +55,4 @@ export default function Veggies(props) {
     </div>
   );
 }
+

@@ -24,17 +24,16 @@ const useStyles = makeStyles((theme) => ({
  
 
 const Login =() =>{
-    let url='https://pizza-apps-backend.herokuapp.com'
-    const [data,setData]=useState({email:"",password:""})
+  let url='https://pizza-apps-backend.herokuapp.com'
+  const [data,setData]=useState({email:"",password:""})
     const [loading,setloading]=useState({show:'Login',disabled:false})
     const submit = async ()=>{
     setloading({show:'Logging in...',disabled:true})
     const res= await axios.post(`${url}/login`,data)
     console.log(res.data)
+    setloading({show:'Login',disabled:false})
     localStorage.setItem('token', res.data.token)
     localStorage.setItem('userdetails',JSON.stringify(res.data.result))
-    
-    setloading({show:'Login',disabled:false})
     window.location.href='/Dashboard'
     }
     const classes = useStyles()
@@ -64,7 +63,10 @@ const Login =() =>{
             <FormControl>
             <Link to='./ForgotPassword'>Forgot Password?</Link>
             </FormControl>
-            </Paper>
+            </Paper><br/><br/>
+            <h4>For Test Purpose use below credentials</h4>
+            <p>Email : test@pizzacorner.com</p>
+            <p>Password : 1234</p>
             </Grid>
             </Grid>
             </div>

@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -8,10 +8,12 @@ import FormLabel from '@material-ui/core/FormLabel';
 const Cheese=(props)=> {
   const [value, setValue] = useState('');
 
-  const handleChange =async (event) => {
+  const handleChange = (event) => {
     setValue(event.target.value);
-    await props.getName(event.target.value,"cheese")
   };
+  useEffect(() => {
+    props.getName(value,"cheese")
+    }, [value])
 
   return (
     <FormControl component="fieldset">

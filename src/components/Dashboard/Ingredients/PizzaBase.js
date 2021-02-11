@@ -10,9 +10,10 @@ import FormLabel from '@material-ui/core/FormLabel';
 
   const handleChange = (event) => {
     setValue(event.target.value);
-    props.getName(event.target.value,"base")
   };
-
+  React.useEffect(() => {
+    props.getName(value,"base")
+    }, [value])
   return (
     <FormControl component="fieldset">
       <FormLabel component="legend"><h2>Pizza Base</h2></FormLabel>

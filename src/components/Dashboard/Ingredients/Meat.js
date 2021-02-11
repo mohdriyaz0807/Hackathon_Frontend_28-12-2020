@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -32,8 +32,10 @@ export default function Meat(props) {
     }
   })
   setState({list:state.list})
-  props.getName(meatlist,"meat")
-  };
+};
+useEffect(() => {
+    props.getName(meatlist,"meat")
+  }, [meatlist])
 
   const mapped = state.list.map((e ) => 
       <FormControlLabel

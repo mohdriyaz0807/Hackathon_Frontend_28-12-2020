@@ -87,7 +87,7 @@ function Dashboard() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <MakeOrder id={userdetails}/>
+          <MakeOrder id={userdetails} change={handleChangeIndex}/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <YourOrders id={userdetails} />

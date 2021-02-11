@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -10,8 +10,10 @@ const Sauce=(props)=> {
 
   const handleChange = (event) => {
     setValue(event.target.value);
-    props.getName(event.target.value,"sauce")
   };
+  useEffect(() => {
+    props.getName(value,"sauce")
+    }, [value])
 
   return (
     <FormControl component="fieldset">

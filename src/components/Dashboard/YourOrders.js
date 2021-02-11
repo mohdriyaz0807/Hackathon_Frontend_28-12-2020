@@ -63,7 +63,7 @@ const YourOrders = (props) => {
     const API_URL = 'https://pizza-apps-backend.herokuapp.com/'
     e.preventDefault();
     const orderUrl = `${API_URL}order`;
-    const response = await axios.post(orderUrl);
+    const response = await axios.get(orderUrl);
     const { data } = response;
     const options = {
       key: process.env.RAZOR_PAY_TEST_KEY,
@@ -88,30 +88,11 @@ const YourOrders = (props) => {
     rzp1.open();
     };
 
-    if(order.length!==0){
-    return (
-      <div className={classes.root}>
-        {order.map((row) => (
-          <Grid container direction="row" justify="space-around" alignItems="center" spacing={3} key={row.orderid}>
-                      <Grid item xs={12} sm={8} md={6}>
-                    <Paper className={classes.paper}>
-                  <h2 className={classes.h2}>{row.orderitems.name}</h2>
-                  <p>{row.orderitems.base}</p>
-                  <p>{row.orderitems.sauce}</p>
-                  <p>{row.orderitems.cheese}</p>
-                  <p>{row.orderitems.veggies.join(', ')}</p>
-                  <p>{row.orderitems.meat.join(', ')}</p>
-                <h2 className={classes.h2}>RS: {eval((row.orderitems.veggies.length*25)+(row.orderitems.meat.length*25)+150)}</h2>
-                <h3>{row.orderitems.status}</h3>
-                <Button variant="outlined" color="secondary" onClick={()=>remove(row.orderid,row.orderitems)}>Remove</Button>
-                </Paper>
-                </Grid>
-                </Grid>
-                ))}
-                <br/>
-                <Button variant="contained" size='large' color="primary" onClick={paymentHandler}>Pay Now</Button>
-            </div>
-            )
+    if(order.length===0){
+      return (
+        <div className={classes1.root}>
+        <Alert severity="info">No orders found ! Make one now to enjoy the treat</Alert>
+      </div> )
     }else if(icon=='error'){
       return(
         <div className={classes.roots}>
@@ -120,11 +101,30 @@ const YourOrders = (props) => {
       )
     }
     else{
-        return (
-            <div className={classes1.root}>
-            <Alert severity="info">No orders found ! Make one now to enjoy the treat</Alert>
-          </div> )
-          }
+      return (
+        <div className={classes.root}>
+          {order.map((row) => (
+            <Grid container direction="row" justify="space-around" alignItems="center" spacing={3} key={row.orderid}>
+                        <Grid item xs={12} sm={8} md={6}>
+                      <Paper className={classes.paper}>
+                    <h2 className={classes.h2}>{row.orderitems.name}</h2>
+                    <p>{row.orderitems.base}</p>
+                    <p>{row.orderitems.sauce}</p>
+                    <p>{row.orderitems.cheese}</p>
+                    <p>{row.orderitems.veggies.join(', ')}</p>
+                    <p>{row.orderitems.meat.join(', ')}</p>
+                  <h2 className={classes.h2}>RS: {eval((row.orderitems.veggies.length*25)+(row.orderitems.meat.length*25)+150)}</h2>
+                  <h3>{row.orderitems.status}</h3>
+                  <Button variant="outlined" color="secondary" onClick={()=>remove(row.orderid,row.orderitems)}>Remove</Button>
+                  </Paper>
+                  </Grid>
+                  </Grid>
+                  ))}
+                  <br/>
+                  <Button variant="contained" size='large' color="primary" onClick={paymentHandler}>Pay Now</Button>
+              </div>
+              )
         }
+      }
 
 export default YourOrders
