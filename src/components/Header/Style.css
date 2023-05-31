@@ -1,5 +1,18 @@
-.Head{
-    position: static;
+.title{
+    font-family: fantasy;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+.title-text{
+    cursor: pointer;
+}
+
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
     left:0;
     top: 0;
     width:100%;
@@ -9,14 +22,18 @@
     text-align: center;
 }
 
-.Link {
-    font-size: x-large;
-    color: white;
-    font-weight: bolder;
-    float:left;
-    text-decoration: none;
+.cart-icon{
+    font-size: 30px;
+    right: 0;
+    position: fixed;
+    float: right;
+    padding-right: 50px;
 }
-.Title{
-    font-family: fantasy;
-    font-size: xx-large;
+
+.user-icon{
+    font-size: 30px;
+    right: 0;
+    position: fixed;
+    float: right;
+    padding-right: 100px;
 }

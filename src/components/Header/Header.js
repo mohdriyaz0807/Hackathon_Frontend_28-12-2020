@@ -1,36 +1,100 @@
 import React from 'react';
-import './Style.css'
-import {Grid,ListItem,ListItemIcon } from "@material-ui/core";
-import { Link } from "react-router-dom";
-import HomeIcon from '@material-ui/icons/Home';
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import FaceIcon from '@material-ui/icons/Face';
-import Logout from '../User/logout'
+import './style.css'
+import Grid from "@mui/material/Grid";
+import Badge from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useHistory } from 'react-router-dom';
+import { Person3TwoTone } from '@mui/icons-material';
+import { Menu, MenuItem } from '@mui/material';
 
-function Header(){
-    return( 
-        <Grid container className="Head">
-            <Grid item xs={12} sm={6} md={6} className="Title">
-              Pizza Corner
-            </Grid>
-            <Grid item xs={4} sm={2} md={2}>
-              <ListItem>
-              <ListItemIcon><Link to="/" ><HomeIcon fontSize="large" color="primary"/>
-                <span className="Link">Home</span></Link></ListItemIcon>
-              </ListItem>
-            </Grid>
-            <Grid item xs={4} sm={2} md={2}>
-            <ListItem>
-              <ListItemIcon><Link to="/admin" ><SupervisorAccountIcon fontSize="large" color="primary"/>
-                <span className="Link">Admin</span></Link></ListItemIcon>
-              </ListItem>
-            </Grid>
-            <Grid item xs={4} sm={2} md={2}>
-            <ListItem>
-              {localStorage.getItem('token') ? <Logout/> : '' }
-              </ListItem>
-            </Grid>
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: '0 4px',
+  },
+}));
+
+function Header({cart, openLogin}){
+  const history = useHistory()
+
+  const token = window.localStorage.getItem('token')
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const openCart = () => {
+    if(!window.location.pathname.includes('Cart'))
+    history.push({pathname: '/Cart'})
+  }
+
+  const goToDashboard = () => {
+    if(!window.location.pathname.includes('Dashboard'))
+    history.push({pathname: '/Dashboard'})
+  }
+
+  const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+  }
+
+  const onLogout = () => {
+    localStorage.clear()
+    window.location.reload()
+  }
+
+    return (
+      <Grid container className="head">
+        <Grid item xs={12} className="title">
+          <span onClick={goToDashboard} className="title-text">
+            Pizza Pan
+          </span>
         </Grid>
-      )
+        <div className="user-icon">
+          <IconButton aria-label="cart" onClick={handleClick}>
+            <Person3TwoTone style={{ color: "#fff" }} />
+          </IconButton>
+        </div>
+        <Menu
+          id="demo-positioned-menu"
+          aria-labelledby="demo-positioned-button"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+        >
+          {token ? (
+            <MenuItem onClick={onLogout}>Logout</MenuItem>
+          ) : (
+            <MenuItem
+              onClick={() => {
+                openLogin();
+                handleClose();
+              }}
+            >
+              Login
+            </MenuItem>
+          )}
+        </Menu>
+        <div className="cart-icon">
+          <IconButton aria-label="cart" onClick={openCart}>
+            <StyledBadge badgeContent={cart.length} color="info">
+              <ShoppingCartIcon style={{ color: "#fff" }} />
+            </StyledBadge>
+          </IconButton>
+        </div>
+      </Grid>
+    );
 }
 export default Header

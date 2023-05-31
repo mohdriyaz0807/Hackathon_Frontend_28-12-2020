@@ -1,101 +1,136 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import SwipeableViews from 'react-swipeable-views';
-import { makeStyles, useTheme , AppBar, Tabs, Tab,Typography,Box} from '@material-ui/core';
-import MakeOrder from './MakeOrder'
-import YourOrders from './YourOrders'
+import React, { useState } from "react";
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Typography from "@mui/material/Typography";
+import { Box, Link } from "@mui/material";
+import { pizzas } from "../pizza-json";
+import { CustomizePizza } from "./CustomizePizza";
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+function Dashboard({cart, setCart}) {
+
+  const [modal,setModal] = useState({open:false, id: ""})
+
+
+  const handleAddToCart = (pizza) => {
+    const oldPizza = cart.find(e => e.id === pizza.id)
+    const obj = oldPizza ? {...oldPizza, count: oldPizza.count + 1} : {...pizza, count: 1}
+    let arr = []
+    if(cart.map(e => e.id).includes(obj.id)){
+      arr = [...cart.filter(e => e.id !== obj.id), obj];
+    } else {
+      arr = [...cart, obj];
+    }
+    setCart(arr);
+  };
+
+  const handleRemoveFromCart = (pizza) => {
+    const oldPizza = cart.find(e => e.id === pizza.id)
+    const obj = {...oldPizza, count: oldPizza.count - 1}
+    const arr =
+      obj.count > 0
+        ? [...cart.filter((e) => e.id !== obj.id), obj]
+        : cart.filter((e) => e.id !== pizza.id);
+    setCart(arr);
+  };
+
+  const handleCustomize =(id)=>{
+    setModal({...modal, open: true, id})
+  }
 
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
+    <Grid container spacing={2} sx={{margin: '120px 60px 0 60px'}}>
+      {pizzas.map((pizza) => {
+        return (
+          <Grid key={pizza.id} paddingBottom={4} item xs={12} sm={12} md={4} lg={4}>
+            <Card sx={{ maxWidth: 350, height: 390 }}>
+              <CardMedia
+                component="img"
+                height="194"
+                image={pizza.image}
+                alt={pizza.name}
+              />
+              <CardActions
+                sx={{ display: "flex", justifyContent: "space-between", alignItems: 'baseline' }}
+              >
+                <>
+                  <CardHeader
+                    title={pizza.name}
+                    subheader={
+                      <Typography variant="h6">
+                        ₹{" "}{pizza.price}
+                      </Typography>}
+                  />
+                  {cart?.find((e) => e.id === pizza.id) ? (
+                    <div style={{display: 'flex', flexDirection: 'column', alignItems:'center'}}>
+                    <Box
+                      className="added-cart-btn"
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <span
+                        className="add"
+                        onClick={() => handleRemoveFromCart(pizza)}
+                      >
+                        -
+                      </span>
+                      <span className="count">
+                        {cart.find((e) => e.id === pizza.id)["count"]}
+                      </span>
+                      <span
+                        className="remove"
+                        onClick={() => handleAddToCart(pizza)}
+                      >
+                        +
+                      </span>
+                    </Box>
+                    <Typography variant="overline">
+                    {cart?.find((e) => e.id === pizza.id) ? <Link
+                        className="customize"
+                        onClick={() => handleCustomize(pizza.id)}
+                      >
+                        customize
+                      </Link> : null}
+                      </Typography>
+                      </div>
+                  ) : (
+                    <button
+                      className="add-cart-btn"
+                      onClick={() => handleAddToCart(pizza)}
+                    >
+                      Add to Cart
+                    </button>
+                  )}
+                </>
+              </CardActions>
+              <CardContent sx={{marginTop:'-10px'}}>
+                <Typography variant="body2" color="text.secondary">
+                  {pizza.description}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        );
+      })}
+      {
+        modal.open && <CustomizePizza modal={modal} setModal={setModal} cart={cart} setCart={setCart}/>
+      }
+      <Box className="footer">
+      <Typography variant="body1">
+        All Rights Reserved. Copyright © mohdriyaz0807.
+      </Typography>
+      <Typography variant="caption">
+        ALL PICTURES SHOWN ARE FOR ILLUSTRATION PURPOSE ONLY.ACTUAL PRODUCT MAY VARY DUE TO PRODUCT ENHANCEMENT.
+      </Typography>
+      </Box>
+    </Grid>
   );
 }
 
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
-  };
-}
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.background.paper,
-    width: '100%',
-  },
-  roots: {
-    backgroundColor: theme.palette.background.paper,
-    width: 500,
-    margin: 'auto',
-    marginTop:'25%',
-    marginBottom:'25%',
-    paddingBlock:'5%',
-  }
-}));
-
-function Dashboard() {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  const handleChangeIndex = (index) => {
-    setValue(index);
-  };
-  const userdetails=JSON.parse(localStorage.getItem('userdetails'))
-  console.log(userdetails);
-  return (
-    <div className={classes.root}>
-      <AppBar position="static" color="default">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="fullWidth"
-          aria-label="full width tabs example"
-        >
-          <Tab label="Create New" {...a11yProps(0)} />
-          <Tab label="Cart" {...a11yProps(1)} />
-        </Tabs>
-      </AppBar>
-      <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={value}
-        onChangeIndex={handleChangeIndex}
-      >
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          <MakeOrder id={userdetails} change={handleChangeIndex}/>
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-          <YourOrders id={userdetails} />
-        </TabPanel>
-      </SwipeableViews>
-    </div>
-  )
-    
-}
-
-export default Dashboard
+export default Dashboard;

@@ -1,66 +1,38 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import {Login,String} from './components/User/login'
-import Register from './components/User/Register'
-import Forgot from './components/User/ForgotPassword'
-import Reset from './components/User/ResetPassword'
-import Dashboard from './components/Dashboard/Dashboard'
-import Home from './components/Home/Home'
-import {Admin,Strings} from './components/Admin/Admin'
-import Header from './components/Header/Header'
-import Footer from './components/Footer/Footer'
-import Error404 from './components/Error-404/404'
-import OrderPanel from './components/AdminDashboard/OrderPanel'
+import React, { useState } from "react";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import Dashboard from "./components/Dashboard/Dashboard";
+import Header from "./components/Header/Header";
+import Error404 from "./components/Error-404/404";
+import Cart from "./components/Cart/Cart";
+import Login from "./components/Login/Login";
+import useLocalStorage from "./useLocalStorage";
+import { useEffect } from "react";
 
 function App() {
+  const [refresh,setrefresh] = useState(false)
+  const [cart, setCart] = useLocalStorage('cart', [])
+  const [open, setOpen] = useState(false)
+
+  useEffect(()=>{
+    setrefresh(!refresh)
+  },[cart])
+
   return (
     <Router>
-      <Header />
+      <Header cart={cart} openLogin={() => setOpen(true)}/>
+      <Login open={open} closeModal={() => setOpen(false)}/>
       <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/admin">
-          <Admin />
-        </Route>
-        <Route exact path="/login">
-          <Login/>
-        </Route>
+        <Route exact path="/" render={() => <Redirect to="/Dashboard" />} />
         <Route exact path="/Dashboard">
-          <Dashboard />
+          <Dashboard cart={cart} setCart={setCart} />
         </Route>
-        <Route path="/Register/admin">
-          <Register/>
-        </Route>
-        <Route path="/Register">
-          <Register/>
-        </Route>
-        <Route exact path="/ForgotPassword">
-          <Forgot/>
-        </Route>
-        <Route exact path="/ForgotPassword/admin">
-          <Forgot/>
-        </Route>
-        <Route exact path="/Orderpanel">
-        <OrderPanel/>
-        </Route>
-        <Route exact path="/ResetPassword/admin/:string">
-          <Reset/>
-        </Route>
-        <Route exact path="/ResetPassword/:string">
-          <Reset/>
-        </Route>
-        <Route path="/String/:requiredString">
-          <String/>
-        </Route>
-        <Route path="/Strings/:requiredString">
-          <Strings/>
+        <Route exact path="/Cart">
+          <Cart cart={cart} setCart={setCart} openLogin={() => setOpen(true)}/>
         </Route>
         <Route path="*">
           <Error404 />
         </Route>
       </Switch>
-      <Footer />
     </Router>
   );
 }
