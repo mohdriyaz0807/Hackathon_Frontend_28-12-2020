@@ -22,7 +22,6 @@ function App() {
 
   const token = window.localStorage.getItem("token");
 
-
   useEffect(() => {
     setrefresh(!refresh);
   }, [cart]);
@@ -36,21 +35,9 @@ function App() {
         <Route exact path="/Dashboard">
           <Dashboard cart={cart} setCart={setCart} />
         </Route>
-        <Route
-          exact
-          path="/Cart"
-          render={() =>
-            token ? (
-              <Cart
-                cart={cart}
-                setCart={setCart}
-                openLogin={() => setOpen(true)}
-              />
-            ) : (
-              <Redirect to="/" />
-            )
-          }
-        />
+        <Route exact path="/Cart">
+          <Cart cart={cart} setCart={setCart} openLogin={() => setOpen(true)} />
+        </Route>
         <Route
           exact
           path="/Orders"
