@@ -4,6 +4,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Header from "./components/Header/Header";
 import Error404 from "./components/Error-404/404";
 import Cart from "./components/Cart/Cart";
+import Orders from "./components/Orders/Orders";
 import Login from "./components/Login/Login";
 import useLocalStorage from "./useLocalStorage";
 import { useEffect } from "react";
@@ -29,6 +30,9 @@ function App() {
         </Route>
         <Route exact path="/Cart">
           <Cart cart={cart} setCart={setCart} openLogin={() => setOpen(true)}/>
+        </Route>
+        <Route exact path="/Orders">
+          <Orders />
         </Route>
         <Route path="*">
           <Error404 />

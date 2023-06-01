@@ -131,11 +131,45 @@ code {
   width: 400px;
 }
 
+.error404 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 300px;
+  padding: 10px;
+  text-align: center;
+}
+
+.orders{
+  margin: 150px auto;
+  width: 800px;
+  height: 500px;
+  padding: 10px 50px;
+  overflow-y: scroll;
+}
+
+.order-cost{
+  text-align: end;
+}
+
 @media screen and (max-width: 600px) {
   .login-modal-paper {
     width: 300px;
   }
   .cart-price-paper {
     width: 100%;
+  }
+  .error404, .orders{
+    width: 75%;
+    padding: 10px;
+  }
+  .orders{
+    height: 70vh;
+    width: 90%;
+  }
+  .order-cost{
+    text-align: start;
   }
 }

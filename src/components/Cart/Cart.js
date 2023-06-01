@@ -12,6 +12,7 @@ import { API_PATH } from "../utils/api";
 function Cart({cart, setCart, openLogin}) {
 
   const token = window.localStorage.getItem('token')
+  const user = JSON.parse(window.localStorage.getItem('userdata'))
 
   const handleAddToCart = (pizza) => {
     const oldPizza = cart.find((e) => e.id === pizza.id);
@@ -49,20 +50,28 @@ function Cart({cart, setCart, openLogin}) {
       description: "Pay now and get your order in 30Minutes",
       handler: async (response) => {
         const paymentId = response.razorpay_payment_id;
-        if(paymentId){
-          localStorage.removeItem('cart')
-          window.location.href = '/Dashboard'
-        }
-        const url = API_PATH + '/capture/' + paymentId + '/' + amount;
+        const userId = user._id
+        const url = API_PATH + '/orders/' + userId;
         await fetch(url, {
-          method: 'get',
+          method: 'post',
           headers: {
-            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
-          }
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': token,
+          },
+          body: JSON.stringify({
+            paymentId,
+            amount,
+            cart,
+            createdDate: new Date()
+          })
         })
           .then(resp => resp.json())
           .then((data) => {
-            console.log('Request succeeded with JSON response', data);
+            if(data.icon === "success"){
+            localStorage.removeItem('cart')
+            window.location.href = '/Orders'
+            }
           })
           .catch((error) => {
             console.log('Request failed', error);
