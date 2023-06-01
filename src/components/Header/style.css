@@ -37,3 +37,11 @@
     float: right;
     padding-right: 100px;
 }
+
+@media screen and (max-width: 600px) {
+    .head {
+        justify-content: start;
+        text-align: start;
+        padding-left: 10px;
+    }
+  }

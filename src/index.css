@@ -70,7 +70,7 @@ code {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 800px;
+  width: 75%;
   height: 600px;
   outline: unset;
   padding: 20px;
@@ -78,8 +78,6 @@ code {
 }
 
 .footer {
-  margin-top: 50px;
-  margin-left: -60px;
   width: 100%;
   color: #fff;
   background-color: tomato;
@@ -89,6 +87,7 @@ code {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .login-modal-paper{
@@ -97,7 +96,7 @@ code {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
-  height: 600px;
+  height: 620px;
   outline: unset;
   padding: 10px;
 }
@@ -121,4 +120,22 @@ code {
   font-weight: bold;
   margin: 20px 0;
   width: 250px;
+}
+
+.login-btn.disabled{
+  cursor: default;
+  background-color: grey;
+}
+
+.cart-price-paper {
+  width: 400px;
+}
+
+@media screen and (max-width: 600px) {
+  .login-modal-paper {
+    width: 300px;
+  }
+  .cart-price-paper {
+    width: 100%;
+  }
 }

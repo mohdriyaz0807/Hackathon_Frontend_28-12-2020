@@ -79,7 +79,7 @@ export const CustomizePizza = ({ modal, setModal, cart, setCart }) => {
         >
           <Close />
         </IconButton>
-        <Typography fontWeight="bold" variant="h4" textAlign="center">
+        <Typography fontWeight="bold" marginTop={1} variant="h5" textAlign="center">
           Pick you prefrences
         </Typography>
         <h2>Select Size</h2>
@@ -87,6 +87,7 @@ export const CustomizePizza = ({ modal, setModal, cart, setCart }) => {
           direction="row"
           divider={<Divider orientation="vertical" flexItem />}
           spacing={2}
+          sx={{ overflowX: "scroll" }}
         >
           {sizes.map((row, i) => (
             <Item

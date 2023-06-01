@@ -7,6 +7,7 @@ import Cart from "./components/Cart/Cart";
 import Login from "./components/Login/Login";
 import useLocalStorage from "./useLocalStorage";
 import { useEffect } from "react";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const [refresh,setrefresh] = useState(false)
@@ -33,6 +34,7 @@ function App() {
           <Error404 />
         </Route>
       </Switch>
+      <Footer />
     </Router>
   );
 }

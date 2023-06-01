@@ -42,11 +42,11 @@ function Dashboard({cart, setCart}) {
   }
 
   return (
-    <Grid container spacing={2} sx={{margin: '120px 60px 0 60px'}}>
+    <Grid container columnSpacing={-2} sx={{margin: '120px 5% 0 5%'}}>
       {pizzas.map((pizza) => {
         return (
           <Grid key={pizza.id} paddingBottom={4} item xs={12} sm={12} md={4} lg={4}>
-            <Card sx={{ maxWidth: 350, height: 390 }}>
+            <Card m={0} sx={{ width: 350, height: 390 }}>
               <CardMedia
                 component="img"
                 height="194"
@@ -121,14 +121,6 @@ function Dashboard({cart, setCart}) {
       {
         modal.open && <CustomizePizza modal={modal} setModal={setModal} cart={cart} setCart={setCart}/>
       }
-      <Box className="footer">
-      <Typography variant="body1">
-        All Rights Reserved. Copyright © mohdriyaz0807.
-      </Typography>
-      <Typography variant="caption">
-        ALL PICTURES SHOWN ARE FOR ILLUSTRATION PURPOSE ONLY.ACTUAL PRODUCT MAY VARY DUE TO PRODUCT ENHANCEMENT.
-      </Typography>
-      </Box>
     </Grid>
   );
 }
